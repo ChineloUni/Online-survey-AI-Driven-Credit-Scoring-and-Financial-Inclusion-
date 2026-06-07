@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Research Proposal — A Simple Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #1a1a2e;
+    --mid: #4a4a6a;
+    --light: #8888aa;
+    --bg: #f8f7f4;
+    --card: #ffffff;
+    --accent1: #2E75B6;
+    --accent2: #1D9E75;
+    --accent3: #BA7517;
+    --accent4: #534AB7;
+    --accent5: #D85A30;
+    --border: #e8e6e0;
+    --shadow: 0 2px 16px rgba(26,26,46,0.08);
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.7;
+    padding: 0 0 60px;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--ink);
+    color: white;
+    padding: 48px 32px 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 70% 50%, rgba(46,117,182,0.25) 0%, transparent 60%),
+                radial-gradient(ellipse at 20% 80%, rgba(83,74,183,0.2) 0%, transparent 50%);
+  }
+  .hero-inner { position: relative; z-index: 1; max-width: 680px; margin: 0 auto; }
+  .hero-tag { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 12px; }
+  .hero h1 { font-family: 'Lora', serif; font-size: clamp(22px, 4vw, 32px); font-weight: 600; line-height: 1.3; margin-bottom: 12px; }
+  .hero-sub { font-size: 14px; color: rgba(255,255,255,0.65); max-width: 500px; margin: 0 auto; }
+  .hero-name { display: inline-block; margin-top: 16px; font-size: 12px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.15); border-radius: 20px; padding: 4px 14px; color: rgba(255,255,255,0.8); }
+
+  /* ── LAYOUT ── */
+  .container { max-width: 720px; margin: 0 auto; padding: 0 20px; }
+
+  /* ── INTRO NOTE ── */
+  .intro-note { background: #EBF5FB; border-left: 3px solid var(--accent1); border-radius: 0 8px 8px 0; padding: 14px 18px; margin: 28px 0 8px; font-size: 14px; color: var(--mid); }
+
+  /* ── STEP ── */
+  .step { background: var(--card); border: 1px solid var(--border); border-radius: 14px; margin-bottom: 18px; overflow: hidden; box-shadow: var(--shadow); }
+  .step-header { display: flex; align-items: flex-start; gap: 14px; padding: 20px 22px 16px; cursor: pointer; user-select: none; }
+  .step-num { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600; flex-shrink: 0; margin-top: 2px; }
+  .step-title-wrap { flex: 1; }
+  .step-chapter { font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 3px; }
+  .step-title { font-family: 'Lora', serif; font-size: 17px; font-weight: 600; line-height: 1.3; }
+  .step-subtitle { font-size: 13px; color: var(--light); margin-top: 3px; }
+  .toggle { font-size: 18px; color: var(--light); margin-top: 6px; transition: transform 0.3s; }
+  .step.open .toggle { transform: rotate(180deg); }
+
+  .step-body { display: none; padding: 0 22px 20px; border-top: 1px solid var(--border); }
+  .step.open .step-body { display: block; }
+
+  .step-intro { font-size: 14px; color: var(--mid); padding: 14px 0 10px; border-bottom: 1px dashed var(--border); margin-bottom: 14px; font-style: italic; }
+
+  /* ── ITEMS ── */
+  .item { margin-bottom: 14px; }
+  .item-q { font-size: 13px; font-weight: 600; color: var(--ink); margin-bottom: 4px; display: flex; gap: 8px; align-items: flex-start; }
+  .item-q::before { content: 'Q'; font-size: 10px; font-weight: 700; background: var(--accent1); color: white; border-radius: 4px; padding: 1px 5px; flex-shrink: 0; margin-top: 1px; }
+  .item-a { font-size: 13px; color: var(--mid); line-height: 1.6; padding-left: 26px; }
+
+  /* ── KEY TERMS ── */
+  .terms { background: var(--bg); border-radius: 10px; padding: 14px 16px; margin-top: 14px; }
+  .terms-title { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--light); margin-bottom: 10px; }
+  .term { display: flex; gap: 10px; margin-bottom: 8px; font-size: 13px; }
+  .term-word { font-weight: 600; color: var(--ink); min-width: 120px; flex-shrink: 0; }
+  .term-def { color: var(--mid); }
+
+  /* ── CITATION BOX ── */
+  .cite-box { background: #FDF8EE; border: 1px solid #EDD99A; border-radius: 10px; padding: 14px 16px; margin-top: 14px; }
+  .cite-title { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent3); margin-bottom: 10px; }
+  .cite-item { font-size: 13px; color: var(--mid); margin-bottom: 6px; line-height: 1.5; }
+  .cite-item strong { color: var(--ink); }
+
+  /* ── TIP ── */
+  .tip { background: #EDFAF4; border-left: 3px solid var(--accent2); border-radius: 0 8px 8px 0; padding: 10px 14px; margin-top: 14px; font-size: 13px; color: #1a5e42; }
+  .tip strong { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 3px; }
+
+  /* ── COLOUR DOTS ── */
+  .c1 { background: #EBF5FB; color: var(--accent1); }
+  .c2 { background: #EAF7F2; color: var(--accent2); }
+  .c3 { background: #FDF4E7; color: var(--accent3); }
+  .c4 { background: #EEEDFB; color: var(--accent4); }
+  .c5 { background: #FAECE7; color: var(--accent5); }
+  .ct1 { color: var(--accent1); }
+  .ct2 { color: var(--accent2); }
+  .ct3 { color: var(--accent3); }
+  .ct4 { color: var(--accent4); }
+  .ct5 { color: var(--accent5); }
+
+  /* ── PROGRESS BAR ── */
+  .progress-wrap { background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; margin-bottom: 24px; margin-top: 24px; }
+  .progress-label { font-size: 12px; font-weight: 500; color: var(--mid); margin-bottom: 8px; }
+  .progress-track { background: var(--border); border-radius: 20px; height: 6px; margin-bottom: 4px; overflow: hidden; }
+  .progress-fill { height: 100%; border-radius: 20px; background: linear-gradient(90deg, var(--accent1), var(--accent2)); width: 0; transition: width 1s ease; }
+  .progress-steps { display: flex; justify-content: space-between; font-size: 10px; color: var(--light); }
+
+  /* ── FINAL CARD ── */
+  .final-card { background: var(--ink); color: white; border-radius: 14px; padding: 24px; margin-top: 28px; text-align: center; }
+  .final-card h3 { font-family: 'Lora', serif; font-size: 18px; margin-bottom: 8px; }
+  .final-card p { font-size: 13px; color: rgba(255,255,255,0.65); }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-tag">PhD Research Proposal — Plain English Guide</div>
+    <h1>Understanding My Research Proposal, Step by Step</h1>
+    <div class="hero-sub">A simple guide to every chapter, every key idea, and every citation — written in plain, everyday language.</div>
+    <div class="hero-name">Chi Abadom · Lincoln University · April 2026</div>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="intro-note">
+    👋 This guide walks you through your proposal from start to finish. Click any section to expand it. Each section explains what it means, why it matters, and what the key words mean in plain English.
+  </div>
+
+  <div class="progress-wrap">
+    <div class="progress-label">Your proposal at a glance — 7 sections to cover</div>
+    <div class="progress-track"><div class="progress-fill" id="pbar"></div></div>
+    <div class="progress-steps">
+      <span>Title & Abstract</span><span>Introduction</span><span>Lit Review</span><span>Methodology</span><span>Conclusion</span><span>Timeline</span><span>Citations</span>
+    </div>
+  </div>
+
+  <!-- STEP 1 -->
+  <div class="step open">
+    <div class="step-header" onclick="toggle(this)">
+      <div class="step-num c1">1</div>
+      <div class="step-title-wrap">
+        <div class="step-chapter ct1">The Beginning</div>
+        <div class="step-title">Title & Abstract — What is my research about?</div>
+        <div class="step-subtitle">The first thing anyone reads</div>
+      </div>
+      <div class="toggle">▾</div>
+    </div>
+    <div class="step-body">
+      <div class="step-intro">Think of the title and abstract as your research's shop window — they tell people what's inside before they commit to reading everything.</div>
+
+      <div class="item">
+        <div class="item-q">What is the title saying?</div>
+        <div class="item-a">Your title is: <em>"AI-Driven Credit Scoring and Financial Inclusion in Developing Economies: A Cross-Regional Configurational Analysis."</em> In plain English: you are studying how AI tools that decide who gets a loan can help more people in poorer countries access money — and you are comparing 9 countries across Africa, Latin America and Asia to see what conditions make it work.</div>
+      </div>
+
+      <div class="item">
+        <div class="item-q">What does the abstract tell us?</div>
+        <div class="item-a">The abstract is a short summary (about half a page) of the whole proposal. It tells the reader: the problem (many people in developing countries can't get loans), what you will do (study 9 countries using a method called fsQCA plus machine learning and a survey), and what you hope to find (which combinations of conditions help AI credit scoring improve financial inclusion).</div>
+      </div>
+
+      <div class="terms">
+        <div class="terms-title">Key terms in plain English</div>
+        <div class="term"><div class="term-word">AI-Driven Credit Scoring</div><div class="term-def">Using computer technology and data (like mobile phone payments) to decide if someone can get a loan — instead of relying on a bank history.</div></div>
+        <div class="term"><div class="term-word">Financial Inclusion</div><div class="term-def">Making sure everyone — especially poor or rural people — has access to financial services like loans, savings and payments.</div></div>
+        <div class="term"><div class="term-word">Developing Economies</div><div class="term-def">Countries that are still growing economically — like Nigeria, Ghana, Kenya, Brazil, Vietnam etc.</div></div>
+        <div class="term"><div class="term-word">fsQCA</div><div class="term-def">A research method (Fuzzy-Set Qualitative Comparative Analysis) that looks at combinations of conditions rather than single causes. Like asking: what mix of ingredients makes a cake rise?</div></div>
+        <div class="term"><div class="term-word">Configurational Analysis</div><div class="term-def">Looking at how different factors work together — not just one at a time.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 2 -->
+  <div class="step">
+    <div class="step-header" onclick="toggle(this)">
+      <div class="step-num c2">2</div>
+      <div class="step-title-wrap">
+        <div class="step-chapter ct2">Chapter 1</div>
+        <div class="step-title">Introduction — Why does this research matter?</div>
+        <div class="step-subtitle">Background, rationale, gap, problem, objectives, and research questions</div>
+      </div>
+      <div class="toggle">▾</div>
+    </div>
+    <div class="step-body">
+      <div class="step-intro">The introduction is you telling your reader: here is the problem, here is why nobody has properly solved it yet, and here is what I am going to do about it.</div>
+
+      <div class="item">
+        <div class="item-q">What is the research background (Section 1.1)?</div>
+        <div class="item-a">Millions of people in countries like Nigeria, Ghana, Kenya, Brazil and Bangladesh cannot get bank loans because they have no formal credit history. Mobile money has helped with payments, but not with getting actual credit. AI can change this by using things like mobile transaction data and utility bills to decide if someone is creditworthy.</div>
+      </div>
+
+      <div class="item">
+        <div class="item-q">What is the research rationale (Section 1.2)?</div>
+        <div class="item-a">This section explains WHY the study is needed. Even though mobile money is growing, access to credit is still very low for poor and rural people. AI offers a solution but also brings risks like bias and privacy problems. The study is also connected to the UN's global goals for poverty reduction and gender equality (SDGs).</div>
+      </div>
+
+      <div class="item">
+        <div class="item-q">What is the research gap (Section 1.3)?</div>
+        <div class="item-a">A research gap is what nobody has properly studied yet. Your four gaps are: (1) financial inclusion is still measured the old way, not accounting for AI; (2) most AI credit scoring evidence comes from rich countries, not the 9 you are studying; (3) ethical concerns about AI are not linked to actual inclusion outcomes; (4) AI, regulation and institutions are studied separately, never as one connected system.</div>
+      </div>
+
+      <div class="item">
+        <div class="item-q">What is the problem statement (Section 1.4)?</div>
+        <div class="item-a">The problem statement sums up the core challenge: traditional credit scoring fails poor and informal workers. AI could fix this but faces 3 big challenges — ethical risks (bias), innovation vs regulation gaps, and the fact that AI models from rich countries don't always work in poorer ones.</div>
+      </div>
+
+      <div class="item">
+        <div class="item-q">What are the research questions and objectives (Section 1.5)?</div>
+        <div class="item-a">Your big question is: <em>Under what combinations of conditions do developing countries achieve higher financial inclusion through AI credit scoring?</em> You have 4 sub-questions and 4 matching objectives — covering the key conditions, regulatory pathways, cross-regional comparison, and data-sparse contexts.</div>
+      </div>
+
+      <div class="tip">
+        <strong>💡 Why 9 countries?</strong>
+        You chose 3 countries from each region (Africa, Latin America, Asia) to compare how AI credit scoring works under different conditions — different levels of mobile technology, different regulations, different income levels.
+      </div>
+
+      <div class="cite-box">
+        <div class="cite-title">Key citations in this chapter — what they say</div>
+        <div class="cite-item"><strong>Demirgüç-Kunt et al. (2021)</strong> — World Bank's Global Findex report showing persistent gaps in financial access globally. This is your main evidence that the problem is real.</div>
+        <div class="cite-item"><strong>Berg et al. (2018)</strong> — Proves AI and digital data can assess creditworthiness better than traditional methods. This is your evidence that AI is the right tool.</div>
+        <div class="cite-item"><strong>Omotosho (2025)</strong> — Most directly relevant study — explores AI credit scoring in emerging economies. You build on this and extend it.</div>
+        <div class="cite-item"><strong>Allen et al. (2016)</strong> — Foundational study linking financial inclusion to poverty reduction. Your baseline theory.</div>
+        <div class="cite-item"><strong>UN (2015)</strong> — The SDGs. Connects your research to global development goals.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 3 -->
+  <div class="step">
+    <div class="step-header" onclick="toggle(this)">
+      <div class="step-num c3">3</div>
+      <div class="step-title-wrap">
+        <div class="step-chapter ct3">Chapter 2</div>
+        <div class="step-title">Literature Review — What has already been studied?</div>
+        <div class="step-subtitle">Theories, empirical evidence, and gaps in the field</div>
+      </div>
+      <div class="toggle">▾</div>
+    </div>
+    <div class="step-body">
+      <div class="step-intro">The literature review shows you have read widely and deeply, and that you know exactly where your research fits in the existing conversation.</div>
+
+      <div class="item">
+        <div class="item-q">What is the theoretical foundation?</div>
+        <div class="item-a">You use Bourdieu's theory of capital as your main lens — the idea that people need different types of "capital" (money, skills, networks) to get ahead. You argue that in the digital age, "digital capital" (like having a smartphone, mobile data history, and digital literacy) determines who gets access to credit through AI systems.</div>
+      </div>
+
+      <div class="item">
+        <div class="item-q">What is Bourdieu's theory in plain English?</div>
+        <div class="item-a">Pierre Bourdieu was a French sociologist who said success in life depends on the resources you have — not just money, but also education, skills and social connections. In your research, people with more digital activity (mobile payments, internet use) have more "digital capital" and are more likely to get loans from AI systems. People without it are left out — which can make inequality worse.</div>
+      </div>
+
+      <div class="item">
+        <div class="item-q">What are the three supporting theories?</div>
+        <div class="item-a"><strong>TAM (Technology Acceptance Model)</strong> — explains why people adopt or reject new technology. <strong>Diffusion of Innovations</strong> — explains how technology spreads through society slowly and unevenly. <strong>Resource-Based View (RBV)</strong> — explains why some institutions (big banks) adopt AI easily while smaller ones can't afford to. Together they explain the human and institutional side of AI adoption.</div>
+      </div>
+
+      <div class="item">
+        <div class="item-q">What does the empirical literature say?</div>
+        <div class="item-a">Research from Kenya, Nigeria and Ghana shows AI credit scoring can expand access to loans, but it depends on strong regulation and governance. Evidence from India, China, Brazil and Mexico shows similar results — AI works well when there is good infrastructure and regulation. But in data-poor and informal economies it struggles.</div>
+      </div>
+
+      <div class="cite-box">
+        <div class="cite-title">Key citations in this chapter</div>
+        <div class="cite-item"><strong>Bourdieu (1986)</strong> — The Forms of Capital. Your main theoretical anchor — explains digital capital and inequality.</div>
+        <div class="cite-item"><strong>Jagtiani & Lemieux (2019)</strong> — Alternative data and machine learning in fintech lending. Key evidence AI works for thin-file borrowers.</div>
+        <div class="cite-item"><strong>Bawuah (2024)</strong> — Mobile money and institutional quality. Shows regulation matters for inclusion outcomes.</div>
+        <div class="cite-item"><strong>Raza (2025)</strong> — AI credit risk and financial justice. Key source on bias and ethical risks.</div>
+        <div class="cite-item"><strong>Victory et al. (2025)</strong> — Ethical frameworks for AI credit scoring. Fairness and transparency concerns.</div>
+        <div class="cite-item"><strong>Jin et al. (2024)</strong> — Rural financial inclusion in China. Evidence exclusion persists even in more advanced developing contexts. Supervisor Prof Gan is a co-author.</div>
+        <div class="cite-item"><strong>Sen (1999)</strong> — Development as Freedom. Frames financial inclusion as a human capability, not just an economic measure.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 4 -->
+  <div class="step">
+    <div class="step-header" onclick="toggle(this)">
+      <div class="step-num c4">4</div>
+      <div class="step-title-wrap">
+        <div class="step-chapter ct4">Chapter 3</div>
+        <div class="step-title">Research Methodology — How will I do my research?</div>
+        <div class="step-subtitle">fsQCA, machine learning, survey — explained simply</div>
+      </div>
+      <div class="toggle">▾</div>
+    </div>
+    <div class="step-body">
+      <div class="step-intro">The methodology chapter explains your research plan — what tools you will use, how you will collect and analyse data, and why your approach is the right one.</div>
+
+      <div class="item">
+        <div class="item-q">What is the overall research design?</div>
+        <div class="item-a">You use a <strong>mixed methods design</strong> — meaning you combine numbers (data analysis) with real people's experiences (survey). You have 3 components working together: (1) fsQCA as the main analysis, (2) machine learning to validate findings, and (3) a user survey to ground findings in real experience.</div>
+      </div>
+
+      <div class="item">
+        <div class="item-q">What is fsQCA and why use it?</div>
+        <div class="item-a">fsQCA (Fuzzy-Set Qualitative Comparative Analysis) looks at combinations of factors rather than single causes. Instead of asking "does regulation cause financial inclusion?" it asks "which combination of regulation + digital access + financial literacy + institutional quality produces financial inclusion?" It is ideal for your 9-country study because it works well with small groups of cases and identifies pathways rather than averages.</div>
+      </div>
+
+      <div class="item">
+        <div class="item-q">What are the 5 conditions you are studying?</div>
+        <div class="item-a">
+          <strong>1. Digital Financial Ecosystem</strong> — how advanced is mobile/internet and fintech in each country?<br>
+          <strong>2. Regulatory Environment</strong> — how strong and clear are financial regulations?<br>
+          <strong>3. Financial Literacy</strong> — do people understand financial products?<br>
+          <strong>4. Institutional Quality</strong> — how trustworthy and effective are government and financial institutions?<br>
+          <strong>5. Market Competition</strong> — how many providers are competing to offer credit?
+        </div>
+      </div>
+
+      <div class="item">
+        <div class="item-q">What is calibration in fsQCA?</div>
+        <div class="item-a">Calibration means converting raw data into scores between 0 and 1. For example, a country with very high financial inclusion gets a score close to 1, and a country with very low inclusion gets a score close to 0. This allows you to compare all 9 countries on the same scale fairly.</div>
+      </div>
+
+      <div class="item">
+        <div class="item-q">What does machine learning add?</div>
+        <div class="item-a">After fsQCA identifies which combinations of conditions work, machine learning (specifically Random Forest) checks which individual conditions are most important across all 9 countries. It also picks up hidden patterns that fsQCA might miss. Think of it as a second opinion that confirms or challenges your main findings.</div>
+      </div>
+
+      <div class="item">
+        <div class="item-q">What is the survey for?</div>
+        <div class="item-a">The online survey (200–300 fintech users, ~35–55 per country) asks real users about their experience with AI credit systems. This fills in what secondary databases can't tell you — how people actually feel about regulation, literacy, trust, and access. It validates whether your data-based findings match reality on the ground.</div>
+      </div>
+
+      <div class="item">
+        <div class="item-q">What data sources are you using?</div>
+        <div class="item-a"><strong>Global Findex</strong> (World Bank) — financial inclusion rates. <strong>World Governance Indicators</strong> — regulatory quality and rule of law. <strong>IMF Financial Access Survey</strong> — banking access. <strong>GSMA Mobile Economy Reports</strong> — mobile money data. <strong>ITU ICT Database</strong> — internet and mobile infrastructure.</div>
+      </div>
+
+      <div class="tip">
+        <strong>💡 Why pragmatist philosophy?</strong>
+        You state your research philosophy is pragmatism — meaning you are focused on what works in practice, not proving one universal theory. This justifies using multiple methods together.
+      </div>
+
+      <div class="cite-box">
+        <div class="cite-title">Key citations in this chapter</div>
+        <div class="cite-item"><strong>Ragin (2008)</strong> — The inventor of fsQCA. Your main methodological authority.</div>
+        <div class="cite-item"><strong>Schneider & Wagemann (2012)</strong> — The practical guide to using fsQCA. You follow their steps throughout.</div>
+        <div class="cite-item"><strong>Mestiri (2024)</strong> — Credit scoring using machine learning. Justifies your ML models.</div>
+        <div class="cite-item"><strong>Creswell & Creswell (2018)</strong> — Mixed methods research design. Justifies combining fsQCA, ML, and survey.</div>
+        <div class="cite-item"><strong>Hastie et al. (2009)</strong> — Elements of Statistical Learning. The authority on your train-validation-test split approach.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 5 -->
+  <div class="step">
+    <div class="step-header" onclick="toggle(this)">
+      <div class="step-num c5">5</div>
+      <div class="step-title-wrap">
+        <div class="step-chapter ct5">Chapter 4</div>
+        <div class="step-title">Conclusion — What will my research achieve?</div>
+        <div class="step-subtitle">How all the pieces fit together</div>
+      </div>
+      <div class="toggle">▾</div>
+    </div>
+    <div class="step-body">
+      <div class="step-intro">The conclusion ties everything together — reminding the reader what problem you are solving, how you are solving it, and why it matters for the real world.</div>
+
+      <div class="item">
+        <div class="item-q">What is the conclusion saying?</div>
+        <div class="item-a">The conclusion confirms: financial exclusion is a real and persistent problem in developing economies. AI credit scoring is a promising but imperfect solution. Your study will be one of the first to examine the combinations of conditions that make AI credit scoring actually work for financial inclusion across 9 countries in 3 regions. Your findings will be useful for policymakers, regulators, financial institutions and technology developers.</div>
+      </div>
+
+      <div class="item">
+        <div class="item-q">What is the contribution of your research?</div>
+        <div class="item-a">You contribute to knowledge in 4 ways: (1) a new cross-regional framework for understanding AI and financial inclusion; (2) evidence on risks, bias and ethical challenges; (3) assessment of mitigation strategies; (4) analysis of how regulation shapes AI adoption. Practically, your findings will help guide responsible AI adoption in developing country credit markets.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 6 -->
+  <div class="step">
+    <div class="step-header" onclick="toggle(this)">
+      <div class="step-num c1">6</div>
+      <div class="step-title-wrap">
+        <div class="step-chapter ct1">Chapter 5</div>
+        <div class="step-title">Timeline & Budget — When and how much?</div>
+        <div class="step-subtitle">Your 3-year PhD plan</div>
+      </div>
+      <div class="toggle">▾</div>
+    </div>
+    <div class="step-body">
+      <div class="step-intro">The timeline shows your supervisors that you have a realistic and organised plan for completing in 3 years.</div>
+
+      <div class="item">
+        <div class="item-q">What does each 6-month period cover?</div>
+        <div class="item-a">
+          <strong>Jul–Dec 2025:</strong> Planning, proposal writing, Chapter 1 approval<br>
+          <strong>Jan–Jun 2026:</strong> Literature review finalised, Chapter 3 framework designed, ethics approval<br>
+          <strong>Jul–Dec 2026:</strong> Methodology finalised, data collection begins (survey + secondary data)<br>
+          <strong>Jan–Jun 2027:</strong> Data analysis, Chapter 4 results drafted<br>
+          <strong>Jul–Dec 2027:</strong> Chapters 5–6 (discussion, conclusion), full draft thesis<br>
+          <strong>Jan–Jun 2028:</strong> Final editing, proofreading, submission
+        </div>
+      </div>
+
+      <div class="item">
+        <div class="item-q">What is the budget?</div>
+        <div class="item-a">NZD $5,000 total: Photocopying ($500), Conference attendance ($2,000), Data collection ($1,500), Thesis editing ($1,000). Note: conference budget was reduced from $3,000 in V1 to $2,000 in V2.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 7 -->
+  <div class="step">
+    <div class="step-header" onclick="toggle(this)">
+      <div class="step-num c2">7</div>
+      <div class="step-title-wrap">
+        <div class="step-chapter ct2">Citations</div>
+        <div class="step-title">How to read and use citations</div>
+        <div class="step-subtitle">APA format, in-text citations, and what each key source says</div>
+      </div>
+      <div class="toggle">▾</div>
+    </div>
+    <div class="step-body">
+      <div class="step-intro">Citations are how academics give credit and show evidence. Every claim in your proposal is backed by a source. Here is how to read and use them.</div>
+
+      <div class="item">
+        <div class="item-q">How do in-text citations work?</div>
+        <div class="item-a">When you write <em>(Berg et al., 2018)</em> in your text, it means: "this idea is supported by Berg and co-authors in their 2018 paper." The full reference is in the reference list at the end. "et al." means "and others" — used when there are more than 2 authors.</div>
+      </div>
+
+      <div class="item">
+        <div class="item-q">How do I read an APA reference?</div>
+        <div class="item-a">Example: <em>Berg, T., Burg, V., Gombović, A., & Puri, M. (2018). On the rise of fintechs — Credit scoring using digital footprints. Review of Financial Studies, 33(7), 2845–2897.</em><br>
+        This tells you: <strong>Authors</strong> (Berg, Burg, Gombović, Puri) · <strong>Year</strong> (2018) · <strong>Title of article</strong> · <strong>Journal name</strong> (Review of Financial Studies) · <strong>Volume(Issue)</strong> (33(7)) · <strong>Page numbers</strong> (2845–2897).</div>
+      </div>
+
+      <div class="cite-box">
+        <div class="cite-title">Your most important citations — what each one does in the proposal</div>
+        <div class="cite-item"><strong>Demirgüç-Kunt et al. (2021/2022)</strong> — World Bank Findex. Your main source of financial inclusion data. Used throughout.</div>
+        <div class="cite-item"><strong>Berg et al. (2018)</strong> — Digital footprints in credit scoring. Core evidence that AI improves credit assessment.</div>
+        <div class="cite-item"><strong>Omotosho (2025)</strong> — AI credit scoring in emerging economies. The study closest to yours. You extend its work.</div>
+        <div class="cite-item"><strong>Ragin (2008)</strong> — fsQCA methodology. Your primary methods authority.</div>
+        <div class="cite-item"><strong>Bourdieu (1986)</strong> — Forms of capital. Your theoretical backbone.</div>
+        <div class="cite-item"><strong>Jagtiani & Lemieux (2019)</strong> — Alternative data in fintech lending. Key evidence for using non-traditional data.</div>
+        <div class="cite-item"><strong>Bawuah (2024)</strong> — Institutional quality and mobile money. Links regulation to inclusion outcomes.</div>
+        <div class="cite-item"><strong>Sen (1999)</strong> — Development as Freedom. Frames your whole study as being about human capability, not just economics.</div>
+        <div class="cite-item"><strong>Jin, Gan & Anh (2024)</strong> — Rural financial inclusion in China. Your supervisor Prof Gan is a co-author — relevant and recent empirical support.</div>
+        <div class="cite-item"><strong>Saka, Gan & Hu (2025)</strong> — Financial inclusion, poverty and income inequality. Another supervisor co-authored paper — very relevant to your contribution.</div>
+        <div class="cite-item"><strong>Allen et al. (2016)</strong> — Foundations of financial inclusion. Classic baseline study you build on.</div>
+        <div class="cite-item"><strong>Raza (2025) & Victory et al. (2025)</strong> — Ethical AI in credit scoring. Your sources for bias, fairness, and transparency concerns.</div>
+        <div class="cite-item"><strong>World Bank (2025)</strong> — Global Findex 2025. Most up-to-date global financial inclusion data.</div>
+      </div>
+
+      <div class="tip">
+        <strong>💡 Pro tip on citations</strong>
+        Notice that two papers co-authored by your supervisor Prof Christopher Gan appear: Jin, Gan & Anh (2024) and Saka, Gan & Hu (2025). Including your supervisor's relevant work shows awareness of their research and is perfectly appropriate — it also signals your research connects directly to ongoing work in your group.
+      </div>
+    </div>
+  </div>
+
+  <div class="final-card">
+    <h3>You now know your proposal inside out 🎓</h3>
+    <p>Every chapter has a job to do. The introduction sets up the problem. The literature review shows what's known and what's missing. The methodology explains how you'll find answers. The conclusion shows why it all matters. You've got this, Chi!</p>
+  </div>
+
+</div>
+
+<script>
+  function toggle(header) {
+    const step = header.parentElement;
+    step.classList.toggle('open');
+  }
+  // animate progress bar on load
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      document.getElementById('pbar').style.width = '100%';
+    }, 300);
+  });
+</script>
+</body>
+</html>
