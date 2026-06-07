@@ -1,0 +1,264 @@
+
+<h2 class="sr-only">Online survey: AI-Driven Credit Scoring and Financial Inclusion — for fintech users across 9 developing countries</h2>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-sans);color:var(--color-text-primary);line-height:1.6}
+.survey{max-width:640px;margin:0 auto;padding:1rem 0 3rem}
+.hero{background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1.25rem 1.5rem;margin-bottom:1.5rem}
+.hero-tag{font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:0.08em;color:var(--color-text-tertiary);margin-bottom:6px}
+.hero h1{font-size:18px;font-weight:500;margin-bottom:6px}
+.hero p{font-size:13px;color:var(--color-text-secondary)}
+.hero-meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+.badge{font-size:11px;font-weight:500;padding:3px 10px;border-radius:20px;background:var(--color-background-info);color:var(--color-text-info)}
+.progress-bar{background:var(--color-background-secondary);border-radius:20px;height:5px;margin-bottom:1.5rem;overflow:hidden}
+.progress-fill{height:100%;border-radius:20px;background:var(--color-text-info);transition:width 0.4s}
+.section-hdr{display:flex;align-items:center;gap:10px;margin:1.5rem 0 0.75rem}
+.section-num{width:28px;height:28px;border-radius:50%;background:var(--color-background-info);color:var(--color-text-info);font-size:12px;font-weight:500;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.section-title{font-size:15px;font-weight:500}
+.section-sub{font-size:12px;color:var(--color-text-secondary);margin-left:38px;margin-bottom:1rem;margin-top:-4px}
+.qcard{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1rem 1.25rem;margin-bottom:10px}
+.qcard.hidden{display:none}
+.qlabel{font-size:13px;font-weight:500;margin-bottom:10px;display:flex;gap:6px}
+.qnum{font-size:11px;font-weight:500;background:var(--color-background-secondary);color:var(--color-text-secondary);border-radius:4px;padding:2px 6px;flex-shrink:0;margin-top:1px}
+.qtext{flex:1}
+.req{color:var(--color-text-danger);margin-left:2px}
+.options{display:flex;flex-direction:column;gap:6px}
+.opt{display:flex;align-items:center;gap:10px;padding:8px 10px;border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);cursor:pointer;transition:background 0.15s;font-size:13px;color:var(--color-text-primary)}
+.opt:hover{background:var(--color-background-secondary)}
+.opt input{accent-color:var(--color-text-info);flex-shrink:0}
+.opt.selected{background:var(--color-background-info);border-color:var(--color-border-info);color:var(--color-text-info)}
+.scale-row{display:flex;gap:4px;align-items:center;flex-wrap:wrap}
+.scale-btn{width:36px;height:36px;border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);font-size:13px;cursor:pointer;background:var(--color-background-primary);color:var(--color-text-primary);transition:all 0.15s;display:flex;align-items:center;justify-content:center}
+.scale-btn:hover{background:var(--color-background-secondary)}
+.scale-btn.sel{background:var(--color-background-info);border-color:var(--color-border-info);color:var(--color-text-info);font-weight:500}
+.scale-labels{display:flex;justify-content:space-between;font-size:11px;color:var(--color-text-tertiary);margin-top:4px}
+select,input[type=text],textarea{width:100%;padding:8px 10px;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);font-size:13px;font-family:var(--font-sans);background:var(--color-background-primary);color:var(--color-text-primary);outline:none}
+select:focus,input[type=text]:focus,textarea:focus{border-color:var(--color-border-info);box-shadow:0 0 0 2px rgba(24,95,165,0.1)}
+textarea{resize:vertical;min-height:70px}
+.nav{display:flex;justify-content:space-between;align-items:center;margin-top:1.5rem;gap:12px}
+.btn{padding:9px 20px;border-radius:var(--border-radius-md);font-size:13px;font-weight:500;cursor:pointer;border:0.5px solid var(--color-border-secondary);background:var(--color-background-primary);color:var(--color-text-primary);transition:all 0.15s}
+.btn:hover{background:var(--color-background-secondary)}
+.btn.primary{background:var(--color-background-info);color:var(--color-text-info);border-color:var(--color-border-info)}
+.btn.primary:hover{opacity:0.85}
+.btn:disabled{opacity:0.4;cursor:not-allowed}
+.step-indicator{font-size:12px;color:var(--color-text-secondary)}
+.consent{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:10px 12px;font-size:12px;color:var(--color-text-secondary);margin-bottom:1rem;border-left:3px solid var(--color-border-info)}
+.success{text-align:center;padding:2rem 1rem}
+.success i{font-size:48px;color:var(--color-text-success);margin-bottom:1rem;display:block}
+.success h2{font-size:20px;font-weight:500;margin-bottom:8px}
+.success p{font-size:14px;color:var(--color-text-secondary);max-width:400px;margin:0 auto}
+.multi-opt{display:flex;flex-direction:column;gap:6px}
+.multi-opt label{display:flex;align-items:center;gap:10px;padding:8px 10px;border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);cursor:pointer;font-size:13px;transition:background 0.15s}
+.multi-opt label:hover{background:var(--color-background-secondary)}
+.multi-opt label.checked{background:var(--color-background-info);border-color:var(--color-border-info);color:var(--color-text-info)}
+.multi-opt input[type=checkbox]{accent-color:var(--color-text-info)}
+</style>
+
+<div class="survey">
+  <div class="hero">
+    <div class="hero-tag">PhD Research Survey · Lincoln University</div>
+    <h1>AI Credit Scoring & Financial Inclusion</h1>
+    <p>This survey is part of a PhD study examining how AI-driven credit scoring affects financial inclusion across developing economies. Your responses are anonymous and will take about 8–10 minutes.</p>
+    <div class="hero-meta">
+      <span class="badge"><i class="ti ti-clock" aria-hidden="true"></i> 8–10 mins</span>
+      <span class="badge"><i class="ti ti-lock" aria-hidden="true"></i> Anonymous</span>
+      <span class="badge"><i class="ti ti-world" aria-hidden="true"></i> 9 countries</span>
+      <span class="badge"><i class="ti ti-building-bank" aria-hidden="true"></i> Fintech users</span>
+    </div>
+  </div>
+
+  <div class="progress-bar"><div class="progress-fill" id="prog" style="width:0%"></div></div>
+
+  <div id="survey-body"></div>
+</div>
+
+<script>
+const sections=[
+{id:0,title:"Consent & Background",sub:"Section A — About you and your country",questions:[
+  {id:"country",type:"select",q:"Which country do you live in?",req:true,opts:["Nigeria","Ghana","Kenya","Brazil","Mexico","Peru","Malaysia","Vietnam","Bangladesh","Other"]},
+  {id:"area",type:"radio",q:"Where do you mainly live?",req:true,opts:["Urban (city or town centre)","Peri-urban (on the outskirts of a city)","Rural (village or countryside)"]},
+  {id:"age",type:"radio",q:"What is your age group?",req:true,opts:["18–24","25–34","35–44","45–54","55 and above"]},
+  {id:"gender",type:"radio",q:"What is your gender?",req:false,opts:["Male","Female","Prefer not to say","Other"]},
+  {id:"education",type:"radio",q:"What is your highest level of education?",req:true,opts:["Primary school","Secondary school","Vocational / technical training","University degree","Postgraduate degree"]},
+  {id:"employment",type:"radio",q:"What best describes your employment?",req:true,opts:["Formal employed (salaried)","Self-employed / business owner","Informal worker / trader","Student","Unemployed","Other"]},
+  {id:"consent",type:"radio",q:"I understand this survey is voluntary, my responses are anonymous, and I consent to participate.",req:true,opts:["Yes, I agree to participate","No, I do not wish to participate"]},
+]},
+{id:1,title:"Financial Access",sub:"Section B — Your current access to financial services",questions:[
+  {id:"bank_account",type:"radio",q:"Do you have a bank account?",req:true,opts:["Yes, at a formal bank","Yes, at a mobile money provider only","No, I do not have any account"]},
+  {id:"credit_access",type:"radio",q:"Have you ever applied for a loan or credit?",req:true,opts:["Yes, and I received it","Yes, but I was rejected","No, I have never applied","No, but I would like to"]},
+  {id:"rejection_reason",type:"radio",q:"If you were ever rejected for a loan, what was the main reason given?",req:false,opts:["No credit history","No collateral or security","Informal employment","Income too low","Did not understand the process","No specific reason given","Not applicable"]},
+  {id:"mobile_money",type:"radio",q:"How often do you use mobile money (e.g. M-Pesa, bKash, MTN MoMo, GCash)?",req:true,opts:["Daily","A few times a week","A few times a month","Rarely","Never"]},
+  {id:"digital_payments",type:"checkbox",q:"Which of these digital financial services have you used? (Select all that apply)",req:false,opts:["Mobile money transfers","Digital savings","Mobile loans (e.g. Fuliza, Okash)","Buy now pay later","QR code payments","Digital insurance","None of the above"]},
+]},
+{id:2,title:"AI Credit Scoring Awareness",sub:"Section C — What you know and think about AI credit scoring",questions:[
+  {id:"ai_aware",type:"radio",q:"Have you heard of AI (computer-based) credit scoring — where an algorithm decides if you qualify for a loan?",req:true,opts:["Yes, I know what it is","I have heard of it but I am not sure what it means","No, I have not heard of it"]},
+  {id:"ai_used",type:"radio",q:"Have you ever used a digital lending platform that uses AI or algorithms to decide your credit score?",req:true,opts:["Yes","No","Not sure"]},
+  {id:"ai_platform",type:"text",q:"If yes, which platform did you use? (e.g. M-Shwari, Nubank, Kredivo, MoMo Credit)",req:false},
+  {id:"ai_understand",type:"scale",q:"How well do you understand how AI decides your credit score?",req:true,min:1,max:5,lo:"Not at all",hi:"Very well"},
+  {id:"ai_fair",type:"scale",q:"How fair do you think AI credit scoring is for people like you?",req:true,min:1,max:5,lo:"Very unfair",hi:"Very fair"},
+  {id:"ai_trust",type:"scale",q:"How much do you trust AI systems to make fair credit decisions?",req:true,min:1,max:5,lo:"No trust",hi:"Full trust"},
+]},
+{id:3,title:"Regulation & Institutions",sub:"Section D — Your views on rules and oversight of AI credit systems",questions:[
+  {id:"reg_aware",type:"radio",q:"Are you aware of any laws or rules in your country that regulate how AI credit scoring works?",req:true,opts:["Yes, I am aware","I have heard something about it","No, I am not aware","I am not sure"]},
+  {id:"reg_trust",type:"scale",q:"How much do you trust the institutions (government, regulators, banks) overseeing AI credit systems in your country?",req:true,min:1,max:5,lo:"No trust at all",hi:"Full trust"},
+  {id:"reg_protect",type:"scale",q:"How well do you feel your data and privacy are protected when you use digital financial services?",req:true,min:1,max:5,lo:"Not protected at all",hi:"Very well protected"},
+  {id:"reg_needed",type:"radio",q:"Do you think stronger regulation of AI credit scoring is needed in your country?",req:true,opts:["Yes, definitely","Yes, probably","Not sure","Probably not","No, regulation is already adequate"]},
+  {id:"data_concern",type:"checkbox",q:"What concerns you most about AI credit scoring? (Select all that apply)",req:false,opts:["My data could be misused","The AI might discriminate against people like me","I don't understand how decisions are made","There is no one to complain to if it goes wrong","High interest rates on AI-approved loans","I have no concerns","Other"]},
+]},
+{id:4,title:"Financial Literacy & Competition",sub:"Section E — Your knowledge and choices in financial services",questions:[
+  {id:"fin_lit",type:"scale",q:"How confident are you in understanding financial products like loans, interest rates, and credit scores?",req:true,min:1,max:5,lo:"Not confident at all",hi:"Very confident"},
+  {id:"compare",type:"radio",q:"Do you feel you have enough choice of lenders and credit providers in your area?",req:true,opts:["Yes, there are many options","There are some options but limited","No, there are very few options","I do not know what options are available"]},
+  {id:"switch",type:"radio",q:"Have you ever switched from one financial provider to another because of better terms or a better AI credit product?",req:true,opts:["Yes","No","I was not aware I could do this"]},
+  {id:"info_source",type:"checkbox",q:"Where do you usually get information about financial products and credit? (Select all that apply)",req:false,opts:["Family and friends","Social media","TV or radio","Bank or lender directly","Community or religious group","Mobile app notifications","I don't usually look for this information"]},
+]},
+{id:5,title:"Impact & Suggestions",sub:"Section F — How AI credit scoring has affected you, and what could improve it",questions:[
+  {id:"impact",type:"radio",q:"Overall, do you feel AI-driven credit scoring has improved or worsened your ability to access credit?",req:true,opts:["Greatly improved","Somewhat improved","No change","Somewhat worsened","Greatly worsened","I have not used AI credit scoring"]},
+  {id:"inclusion",type:"scale",q:"How much do you feel AI credit scoring has helped people like you access financial services they would not otherwise have?",req:true,min:1,max:5,lo:"Not at all",hi:"A great deal"},
+  {id:"recommend",type:"scale",q:"How likely are you to recommend an AI-based credit platform to someone in your community?",req:true,min:1,max:5,lo:"Not at all likely",hi:"Very likely"},
+  {id:"improve",type:"checkbox",q:"What would make you more likely to use or trust AI credit scoring? (Select all that apply)",req:false,opts:["More transparency about how decisions are made","Stronger government oversight and regulation","Lower interest rates","Better customer support when things go wrong","More financial education","Protection against data misuse","Nothing — I already trust it","Other"]},
+  {id:"comments",type:"textarea",q:"Is there anything else you would like to share about your experience with AI credit scoring or financial services in your country?",req:false},
+]},
+];
+
+let current=0;
+let answers={};
+
+function totalQ(){return sections.reduce((a,s)=>a+s.questions.length,0)}
+function answeredQ(){return Object.keys(answers).length}
+
+function render(){
+  const sec=sections[current];
+  const total=sections.length;
+  const pct=Math.round((current/total)*100);
+  document.getElementById('prog').style.width=pct+'%';
+
+  let html=`<div class="section-hdr"><div class="section-num">${current+1}</div><div class="section-title">${sec.title}</div></div>`;
+  html+=`<p class="section-sub">${sec.sub}</p>`;
+
+  if(current===0){
+    html+=`<div class="consent"><i class="ti ti-shield-check" aria-hidden="true"></i> This survey is conducted for PhD research at Lincoln University, New Zealand. Your responses are completely anonymous. No personal identifying information is collected. You may stop at any time.</div>`;
+  }
+
+  sec.questions.forEach(q=>{
+    html+=`<div class="qcard" id="qc-${q.id}">`;
+    html+=`<div class="qlabel"><span class="qnum">${q.id.toUpperCase().replace(/_/g,' ')}</span><span class="qtext">${q.q}${q.req?'<span class="req">*</span>':''}</span></div>`;
+
+    if(q.type==='radio'){
+      html+=`<div class="options">`;
+      q.opts.forEach(o=>{
+        const sel=answers[q.id]===o?'selected':'';
+        html+=`<div class="opt ${sel}" onclick="pick('${q.id}','${o.replace(/'/g,"\\'")}',this)"><input type="radio" name="${q.id}" ${sel?'checked':''} aria-label="${o}"> ${o}</div>`;
+      });
+      html+=`</div>`;
+    } else if(q.type==='select'){
+      const val=answers[q.id]||'';
+      html+=`<select onchange="answers['${q.id}']=this.value" aria-label="${q.q}"><option value="">— Select your country —</option>`;
+      q.opts.forEach(o=>{ html+=`<option value="${o}" ${val===o?'selected':''}>${o}</option>`; });
+      html+=`</select>`;
+    } else if(q.type==='scale'){
+      html+=`<div class="scale-row">`;
+      for(let i=q.min;i<=q.max;i++){
+        const sel=answers[q.id]===i?'sel':'';
+        html+=`<div class="scale-btn ${sel}" onclick="pickScale('${q.id}',${i},this)" role="button" aria-label="Score ${i}">${i}</div>`;
+      }
+      html+=`</div><div class="scale-labels"><span>${q.lo}</span><span>${q.hi}</span></div>`;
+    } else if(q.type==='text'){
+      const val=answers[q.id]||'';
+      html+=`<input type="text" placeholder="Type your answer..." value="${val}" oninput="answers['${q.id}']=this.value" aria-label="${q.q}">`;
+    } else if(q.type==='textarea'){
+      const val=answers[q.id]||'';
+      html+=`<textarea placeholder="Share your thoughts..." oninput="answers['${q.id}']=this.value" aria-label="${q.q}">${val}</textarea>`;
+    } else if(q.type==='checkbox'){
+      const checked=answers[q.id]||[];
+      html+=`<div class="multi-opt">`;
+      q.opts.forEach(o=>{
+        const isChk=checked.includes(o);
+        html+=`<label class="${isChk?'checked':''}"><input type="checkbox" ${isChk?'checked':''} onchange="toggleCheck('${q.id}','${o.replace(/'/g,"\\'")}',this)" aria-label="${o}"> ${o}</label>`;
+      });
+      html+=`</div>`;
+    }
+    html+=`</div>`;
+  });
+
+  const isLast=current===sections.length-1;
+  html+=`<div class="nav">`;
+  html+=`<button class="btn" onclick="goBack()" ${current===0?'disabled':''} aria-label="Go back"><i class="ti ti-arrow-left" aria-hidden="true"></i> Back</button>`;
+  html+=`<span class="step-indicator">Section ${current+1} of ${sections.length}</span>`;
+  if(isLast){
+    html+=`<button class="btn primary" onclick="submit()" aria-label="Submit survey">Submit <i class="ti ti-check" aria-hidden="true"></i></button>`;
+  } else {
+    html+=`<button class="btn primary" onclick="goNext()" aria-label="Continue to next section">Next <i class="ti ti-arrow-right" aria-hidden="true"></i></button>`;
+  }
+  html+=`</div>`;
+
+  document.getElementById('survey-body').innerHTML=html;
+}
+
+function pick(id,val,el){
+  answers[id]=val;
+  el.closest('.options').querySelectorAll('.opt').forEach(o=>o.classList.remove('selected'));
+  el.classList.add('selected');
+}
+
+function pickScale(id,val,el){
+  answers[id]=val;
+  el.parentElement.querySelectorAll('.scale-btn').forEach(b=>b.classList.remove('sel'));
+  el.classList.add('sel');
+}
+
+function toggleCheck(id,val,el){
+  if(!answers[id]) answers[id]=[];
+  if(el.checked){
+    if(!answers[id].includes(val)) answers[id].push(val);
+    el.closest('label').classList.add('checked');
+  } else {
+    answers[id]=answers[id].filter(v=>v!==val);
+    el.closest('label').classList.remove('checked');
+  }
+}
+
+function validate(){
+  const sec=sections[current];
+  for(const q of sec.questions){
+    if(!q.req) continue;
+    const a=answers[q.id];
+    if(!a || (Array.isArray(a)&&a.length===0) || a==='') return false;
+  }
+  return true;
+}
+
+function goNext(){
+  if(!validate()){
+    alert('Please answer all required questions (*) before continuing.');
+    return;
+  }
+  if(answers['consent']==='No, I do not wish to participate'){
+    document.getElementById('survey-body').innerHTML=`<div class="success"><i class="ti ti-heart" aria-hidden="true"></i><h2>Thank you for your time</h2><p>You have chosen not to participate. We respect your decision. Thank you for considering this survey.</p></div>`;
+    return;
+  }
+  current++;
+  render();
+  window.scrollTo(0,0);
+}
+
+function goBack(){
+  if(current>0){ current--; render(); window.scrollTo(0,0); }
+}
+
+function submit(){
+  if(!validate()){
+    alert('Please answer all required questions (*) before submitting.');
+    return;
+  }
+  document.getElementById('survey-body').innerHTML=`
+    <div class="success">
+      <i class="ti ti-circle-check" aria-hidden="true"></i>
+      <h2>Thank you, your response has been recorded!</h2>
+      <p>Your input will contribute to PhD research at Lincoln University on AI credit scoring and financial inclusion across developing economies. We are grateful for your time.</p>
+      <p style="margin-top:16px;font-size:12px;color:var(--color-text-tertiary)">Supervised by Professor Christopher Gan · Lincoln University, New Zealand</p>
+    </div>`;
+  document.getElementById('prog').style.width='100%';
+}
+
+render();
+</script>

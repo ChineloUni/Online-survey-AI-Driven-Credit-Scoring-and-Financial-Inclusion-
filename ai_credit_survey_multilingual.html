@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Credit Scoring Survey | Lincoln University</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;background:#f5f5f0;color:#1a1a1a;min-height:100vh;padding:0 0 60px}
+.lang-bar{background:#1F4E79;padding:10px 20px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;position:sticky;top:0;z-index:100}
+.lang-bar label{color:rgba(255,255,255,0.7);font-size:12px;font-weight:500}
+.lang-btn{padding:5px 12px;border-radius:20px;border:1px solid rgba(255,255,255,0.3);background:transparent;color:rgba(255,255,255,0.8);font-size:12px;cursor:pointer;transition:all 0.2s}
+.lang-btn:hover,.lang-btn.active{background:rgba(255,255,255,0.2);color:#fff;border-color:rgba(255,255,255,0.6)}
+.lang-btn.active{font-weight:600}
+.wrap{max-width:660px;margin:0 auto;padding:20px 16px}
+.hero{background:#fff;border-radius:12px;border:1px solid #e0ddd6;padding:24px;margin-bottom:16px}
+.hero-tag{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;color:#888;margin-bottom:8px}
+.hero h1{font-size:20px;font-weight:600;color:#1F4E79;margin-bottom:8px;line-height:1.3}
+.hero p{font-size:13px;color:#555;line-height:1.6}
+.badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.badge{font-size:11px;padding:3px 10px;border-radius:20px;background:#EBF5FB;color:#185FA5;font-weight:500}
+.prog-wrap{background:#fff;border-radius:8px;padding:12px 16px;margin-bottom:16px;border:1px solid #e0ddd6}
+.prog-label{font-size:12px;color:#888;margin-bottom:6px}
+.prog-track{background:#e8e6e0;border-radius:20px;height:5px;overflow:hidden}
+.prog-fill{height:100%;border-radius:20px;background:linear-gradient(90deg,#1F4E79,#2E75B6);transition:width 0.4s}
+.sec-hdr{display:flex;align-items:center;gap:10px;margin:20px 0 6px}
+.sec-num{width:30px;height:30px;border-radius:50%;background:#EBF5FB;color:#185FA5;font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.sec-title{font-size:15px;font-weight:600;color:#1a1a1a}
+.sec-sub{font-size:12px;color:#888;margin-bottom:14px;margin-left:40px}
+.qcard{background:#fff;border:1px solid #e0ddd6;border-radius:12px;padding:16px;margin-bottom:10px}
+.qlabel{font-size:13px;font-weight:600;margin-bottom:10px;color:#1a1a1a;line-height:1.4}
+.req{color:#D85A30;margin-left:2px}
+.opts{display:flex;flex-direction:column;gap:6px}
+.opt{display:flex;align-items:center;gap:10px;padding:9px 12px;border:1px solid #e0ddd6;border-radius:8px;cursor:pointer;font-size:13px;color:#1a1a1a;transition:all 0.15s;user-select:none}
+.opt:hover{background:#f5f5f0}
+.opt.sel{background:#EBF5FB;border-color:#B5D4F4;color:#185FA5}
+.opt input{accent-color:#185FA5;flex-shrink:0}
+.scale-wrap{margin-top:4px}
+.scale-row{display:flex;gap:5px;flex-wrap:wrap}
+.scb{width:38px;height:38px;border:1px solid #e0ddd6;border-radius:8px;font-size:13px;cursor:pointer;background:#fff;color:#1a1a1a;display:flex;align-items:center;justify-content:center;transition:all 0.15s;user-select:none}
+.scb:hover{background:#f5f5f0}
+.scb.sel{background:#EBF5FB;border-color:#B5D4F4;color:#185FA5;font-weight:600}
+.scale-lbs{display:flex;justify-content:space-between;font-size:11px;color:#888;margin-top:4px}
+select,input[type=text],textarea{width:100%;padding:9px 12px;border:1px solid #e0ddd6;border-radius:8px;font-size:13px;font-family:inherit;background:#fff;color:#1a1a1a;outline:none;transition:border 0.15s}
+select:focus,input[type=text]:focus,textarea:focus{border-color:#2E75B6;box-shadow:0 0 0 3px rgba(46,117,182,0.1)}
+textarea{resize:vertical;min-height:80px}
+.chk-group{display:flex;flex-direction:column;gap:6px}
+.chk-opt{display:flex;align-items:center;gap:10px;padding:9px 12px;border:1px solid #e0ddd6;border-radius:8px;cursor:pointer;font-size:13px;transition:all 0.15s;user-select:none}
+.chk-opt:hover{background:#f5f5f0}
+.chk-opt.chked{background:#EBF5FB;border-color:#B5D4F4;color:#185FA5}
+.chk-opt input{accent-color:#185FA5;flex-shrink:0}
+.nav{display:flex;justify-content:space-between;align-items:center;margin-top:20px;gap:12px}
+.btn{padding:10px 22px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;border:1px solid #d0cdc7;background:#fff;color:#1a1a1a;transition:all 0.2s}
+.btn:hover{background:#f5f5f0}
+.btn:disabled{opacity:0.35;cursor:not-allowed}
+.btn.primary{background:#1F4E79;color:#fff;border-color:#1F4E79}
+.btn.primary:hover{background:#2E75B6}
+.step-ind{font-size:12px;color:#888}
+.consent-box{background:#EBF5FB;border-left:3px solid #2E75B6;border-radius:0 8px 8px 0;padding:10px 14px;font-size:12px;color:#185FA5;margin-bottom:14px;line-height:1.5}
+.success{text-align:center;padding:40px 20px;background:#fff;border-radius:12px;border:1px solid #e0ddd6}
+.success .icon{font-size:48px;margin-bottom:16px}
+.success h2{font-size:20px;font-weight:600;color:#1D9E75;margin-bottom:10px}
+.success p{font-size:14px;color:#555;max-width:400px;margin:0 auto;line-height:1.6}
+.declined{text-align:center;padding:40px 20px;background:#fff;border-radius:12px;border:1px solid #e0ddd6}
+.flag{font-size:16px}
+</style>
+</head>
+<body>
+
+<div class="lang-bar">
+  <label>🌐 Language:</label>
+  <button class="lang-btn active" onclick="setLang('en')">🇬🇧 English</button>
+  <button class="lang-btn" onclick="setLang('pt')">🇧🇷 Português</button>
+  <button class="lang-btn" onclick="setLang('es')">🇲🇽 Español</button>
+  <button class="lang-btn" onclick="setLang('ms')">🇲🇾 Bahasa</button>
+  <button class="lang-btn" onclick="setLang('vi')">🇻🇳 Tiếng Việt</button>
+  <button class="lang-btn" onclick="setLang('bn')">🇧🇩 বাংলা</button>
+</div>
+
+<div class="wrap">
+  <div class="hero">
+    <div class="hero-tag" id="h-tag">PhD Research Survey · Lincoln University</div>
+    <h1 id="h-title">AI Credit Scoring & Financial Inclusion</h1>
+    <p id="h-desc">This survey is part of a PhD study examining how AI-driven credit scoring affects financial inclusion across developing economies. Your responses are completely anonymous and will take about 8–10 minutes.</p>
+    <div class="badges">
+      <span class="badge" id="b1">⏱ 8–10 mins</span>
+      <span class="badge" id="b2">🔒 Anonymous</span>
+      <span class="badge" id="b3">🌍 9 countries</span>
+      <span class="badge" id="b4">Supervised by Prof. Christopher Gan</span>
+    </div>
+  </div>
+  <div class="prog-wrap">
+    <div class="prog-label" id="prog-label">Section 1 of 6</div>
+    <div class="prog-track"><div class="prog-fill" id="prog" style="width:0%"></div></div>
+  </div>
+  <div id="body"></div>
+</div>
+
+<script>
+const T={
+en:{
+  tag:"PhD Research Survey · Lincoln University",
+  title:"AI Credit Scoring & Financial Inclusion",
+  desc:"This survey is part of a PhD study examining how AI-driven credit scoring affects financial inclusion across developing economies. Your responses are completely anonymous and will take about 8–10 minutes.",
+  b:["⏱ 8–10 mins","🔒 Anonymous","🌍 9 countries","Supervised by Prof. Christopher Gan"],
+  back:"← Back",next:"Next →",submit:"Submit ✓",
+  required:"Please answer all required questions (*) before continuing.",
+  of:"Section",of2:"of",
+  consent_note:"This survey is conducted for PhD research at Lincoln University, New Zealand. Your responses are completely anonymous. No personal identifying information is collected. You may stop at any time.",
+  success_title:"Thank you! Your response has been recorded.",
+  success_msg:"Your input will contribute to PhD research at Lincoln University on AI credit scoring and financial inclusion. We are very grateful for your time.",
+  success_foot:"Supervised by Professor Christopher Gan · Lincoln University, New Zealand",
+  declined_title:"Thank you for your time.",
+  declined_msg:"You have chosen not to participate. We respect your decision. Thank you for considering this survey.",
+  sections:[
+    {title:"Consent & Background",sub:"Section A — About you and your country"},
+    {title:"Financial Access",sub:"Section B — Your current access to financial services"},
+    {title:"AI Credit Scoring Awareness",sub:"Section C — What you know about AI credit scoring"},
+    {title:"Regulation & Institutions",sub:"Section D — Your views on rules and oversight"},
+    {title:"Financial Literacy & Competition",sub:"Section E — Your knowledge and choices"},
+    {title:"Impact & Suggestions",sub:"Section F — How AI credit scoring has affected you"},
+  ],
+  questions:[
+    [{id:"country",type:"select",q:"Which country do you live in?",req:true,opts:["Nigeria","Ghana","Kenya","Brazil","Mexico","Peru","Malaysia","Vietnam","Bangladesh","Other"]},
+     {id:"area",type:"radio",q:"Where do you mainly live?",req:true,opts:["Urban (city or town centre)","Peri-urban (outskirts of a city)","Rural (village or countryside)"]},
+     {id:"age",type:"radio",q:"What is your age group?",req:true,opts:["18–24","25–34","35–44","45–54","55 and above"]},
+     {id:"gender",type:"radio",q:"What is your gender?",req:false,opts:["Male","Female","Prefer not to say","Other"]},
+     {id:"education",type:"radio",q:"What is your highest level of education?",req:true,opts:["Primary school","Secondary school","Vocational / technical training","University degree","Postgraduate degree"]},
+     {id:"employment",type:"radio",q:"What best describes your employment?",req:true,opts:["Formally employed (salaried)","Self-employed / business owner","Informal worker / trader","Student","Unemployed","Other"]},
+     {id:"consent",type:"radio",q:"I understand this survey is voluntary, my responses are anonymous, and I consent to participate.",req:true,opts:["Yes, I agree to participate","No, I do not wish to participate"]}],
+    [{id:"bank",type:"radio",q:"Do you have a bank account?",req:true,opts:["Yes, at a formal bank","Yes, at a mobile money provider only","No, I do not have any account"]},
+     {id:"credit",type:"radio",q:"Have you ever applied for a loan or credit?",req:true,opts:["Yes, and I received it","Yes, but I was rejected","No, I have never applied","No, but I would like to"]},
+     {id:"reject",type:"radio",q:"If you were ever rejected for a loan, what was the main reason?",req:false,opts:["No credit history","No collateral","Informal employment","Income too low","Did not understand the process","No specific reason given","Not applicable"]},
+     {id:"mobile",type:"radio",q:"How often do you use mobile money (e.g. M-Pesa, bKash, MTN MoMo, GCash)?",req:true,opts:["Daily","A few times a week","A few times a month","Rarely","Never"]},
+     {id:"digisvc",type:"checkbox",q:"Which digital financial services have you used? (Select all that apply)",req:false,opts:["Mobile money transfers","Digital savings","Mobile loans (e.g. Fuliza, Okash)","Buy now pay later","QR code payments","Digital insurance","None of the above"]}],
+    [{id:"aware",type:"radio",q:"Have you heard of AI credit scoring — where an algorithm decides if you qualify for a loan?",req:true,opts:["Yes, I know what it is","I have heard of it but am not sure","No, I have not heard of it"]},
+     {id:"used",type:"radio",q:"Have you ever used a digital lending platform that uses AI to decide your credit?",req:true,opts:["Yes","No","Not sure"]},
+     {id:"platform",type:"text",q:"If yes, which platform? (e.g. M-Shwari, Nubank, Kredivo, MoMo Credit)",req:false},
+     {id:"understand",type:"scale",q:"How well do you understand how AI decides your credit score?",req:true,min:1,max:5,lo:"Not at all",hi:"Very well"},
+     {id:"fair",type:"scale",q:"How fair do you think AI credit scoring is for people like you?",req:true,min:1,max:5,lo:"Very unfair",hi:"Very fair"},
+     {id:"trust_ai",type:"scale",q:"How much do you trust AI systems to make fair credit decisions?",req:true,min:1,max:5,lo:"No trust",hi:"Full trust"}],
+    [{id:"reg_aware",type:"radio",q:"Are you aware of any laws regulating AI credit scoring in your country?",req:true,opts:["Yes, I am aware","I have heard something","No, I am not aware","Not sure"]},
+     {id:"reg_trust",type:"scale",q:"How much do you trust institutions overseeing AI credit systems in your country?",req:true,min:1,max:5,lo:"No trust",hi:"Full trust"},
+     {id:"data_prot",type:"scale",q:"How well do you feel your data and privacy are protected when using digital financial services?",req:true,min:1,max:5,lo:"Not protected",hi:"Very well protected"},
+     {id:"reg_need",type:"radio",q:"Do you think stronger regulation of AI credit scoring is needed in your country?",req:true,opts:["Yes, definitely","Yes, probably","Not sure","Probably not","No, regulation is already adequate"]},
+     {id:"concerns",type:"checkbox",q:"What concerns you most about AI credit scoring? (Select all that apply)",req:false,opts:["My data could be misused","The AI might discriminate against me","I don't understand how decisions are made","No one to complain to if it goes wrong","High interest rates","I have no concerns","Other"]}],
+    [{id:"fin_lit",type:"scale",q:"How confident are you in understanding financial products like loans, interest rates, and credit scores?",req:true,min:1,max:5,lo:"Not confident",hi:"Very confident"},
+     {id:"choice",type:"radio",q:"Do you feel you have enough choice of lenders and credit providers in your area?",req:true,opts:["Yes, many options","Some options but limited","Very few options","I do not know what options are available"]},
+     {id:"switch",type:"radio",q:"Have you ever switched financial provider because of a better AI credit product?",req:true,opts:["Yes","No","I was not aware I could do this"]},
+     {id:"info",type:"checkbox",q:"Where do you get information about financial products? (Select all that apply)",req:false,opts:["Family and friends","Social media","TV or radio","Bank or lender directly","Community or religious group","Mobile app notifications","I don't usually look for this"]}],
+    [{id:"impact",type:"radio",q:"Overall, has AI credit scoring improved or worsened your ability to access credit?",req:true,opts:["Greatly improved","Somewhat improved","No change","Somewhat worsened","Greatly worsened","I have not used AI credit scoring"]},
+     {id:"inclusion",type:"scale",q:"How much has AI credit scoring helped people like you access financial services they would not otherwise have?",req:true,min:1,max:5,lo:"Not at all",hi:"A great deal"},
+     {id:"recommend",type:"scale",q:"How likely are you to recommend an AI credit platform to someone in your community?",req:true,min:1,max:5,lo:"Not likely",hi:"Very likely"},
+     {id:"improve",type:"checkbox",q:"What would make you more likely to trust AI credit scoring? (Select all that apply)",req:false,opts:["More transparency about decisions","Stronger government regulation","Lower interest rates","Better customer support","More financial education","Protection against data misuse","Nothing — I already trust it","Other"]},
+     {id:"comments",type:"textarea",q:"Any other comments about your experience with AI credit scoring or financial services in your country?",req:false}]
+  ]
+},
+pt:{
+  tag:"Pesquisa de Doutorado · Universidade Lincoln",
+  title:"Pontuação de Crédito por IA & Inclusão Financeira",
+  desc:"Esta pesquisa faz parte de um estudo de doutorado sobre como a pontuação de crédito por IA afeta a inclusão financeira. Suas respostas são completamente anônimas e levarão cerca de 8 a 10 minutos.",
+  b:["⏱ 8–10 min","🔒 Anônimo","🌍 9 países","Supervisionado por Prof. Christopher Gan"],
+  back:"← Voltar",next:"Próximo →",submit:"Enviar ✓",
+  required:"Por favor, responda todas as perguntas obrigatórias (*) antes de continuar.",
+  of:"Seção",of2:"de",
+  consent_note:"Esta pesquisa é realizada para fins de doutorado na Universidade Lincoln, Nova Zelândia. Suas respostas são completamente anônimas. Você pode parar a qualquer momento.",
+  success_title:"Obrigado! Sua resposta foi registrada.",
+  success_msg:"Sua contribuição ajudará a pesquisa de doutorado sobre pontuação de crédito por IA e inclusão financeira. Somos muito gratos pelo seu tempo.",
+  success_foot:"Supervisionado pelo Professor Christopher Gan · Universidade Lincoln, Nova Zelândia",
+  declined_title:"Obrigado pelo seu tempo.",
+  declined_msg:"Você optou por não participar. Respeitamos sua decisão.",
+  sections:[
+    {title:"Consentimento e Contexto",sub:"Seção A — Sobre você e seu país"},
+    {title:"Acesso Financeiro",sub:"Seção B — Seu acesso atual a serviços financeiros"},
+    {title:"Consciência sobre IA",sub:"Seção C — O que você sabe sobre pontuação de crédito por IA"},
+    {title:"Regulação e Instituições",sub:"Seção D — Sua opinião sobre regras e supervisão"},
+    {title:"Literacia Financeira",sub:"Seção E — Seu conhecimento e opções financeiras"},
+    {title:"Impacto e Sugestões",sub:"Seção F — Como a IA de crédito afetou você"},
+  ],
+  questions:[
+    [{id:"country",type:"select",q:"Em qual país você mora?",req:true,opts:["Nigéria","Gana","Quênia","Brasil","México","Peru","Malásia","Vietnã","Bangladesh","Outro"]},
+     {id:"area",type:"radio",q:"Onde você mora principalmente?",req:true,opts:["Urbano (cidade)","Periurbano (periferia)","Rural (interior)"]},
+     {id:"age",type:"radio",q:"Qual é a sua faixa etária?",req:true,opts:["18–24","25–34","35–44","45–54","55 ou mais"]},
+     {id:"gender",type:"radio",q:"Qual é o seu gênero?",req:false,opts:["Masculino","Feminino","Prefiro não dizer","Outro"]},
+     {id:"education",type:"radio",q:"Qual é o seu nível de escolaridade?",req:true,opts:["Ensino fundamental","Ensino médio","Formação técnica/profissional","Graduação universitária","Pós-graduação"]},
+     {id:"employment",type:"radio",q:"Qual é a sua situação de emprego?",req:true,opts:["Empregado formal (assalariado)","Autônomo / empresário","Trabalhador informal","Estudante","Desempregado","Outro"]},
+     {id:"consent",type:"radio",q:"Entendo que esta pesquisa é voluntária, minhas respostas são anônimas e consinto em participar.",req:true,opts:["Sim, concordo em participar","Não, não desejo participar"]}],
+    [{id:"bank",type:"radio",q:"Você tem conta bancária?",req:true,opts:["Sim, em banco formal","Sim, apenas em serviço de dinheiro móvel","Não tenho conta"]},
+     {id:"credit",type:"radio",q:"Você já solicitou um empréstimo ou crédito?",req:true,opts:["Sim, e recebi","Sim, mas fui recusado","Nunca solicitei","Nunca, mas gostaria"]},
+     {id:"reject",type:"radio",q:"Se foi recusado, qual foi o principal motivo?",req:false,opts:["Sem histórico de crédito","Sem garantia","Emprego informal","Renda muito baixa","Não entendi o processo","Nenhuma razão específica","Não se aplica"]},
+     {id:"mobile",type:"radio",q:"Com que frequência você usa dinheiro móvel (ex: PIX, Nubank)?",req:true,opts:["Diariamente","Algumas vezes por semana","Algumas vezes por mês","Raramente","Nunca"]},
+     {id:"digisvc",type:"checkbox",q:"Quais serviços financeiros digitais você já usou?",req:false,opts:["Transferências de dinheiro móvel","Poupança digital","Empréstimos pelo celular","Compre agora, pague depois","Pagamentos por QR code","Seguro digital","Nenhum dos acima"]}],
+    [{id:"aware",type:"radio",q:"Você já ouviu falar de pontuação de crédito por IA — onde um algoritmo decide se você pode obter empréstimo?",req:true,opts:["Sim, sei o que é","Já ouvi, mas não tenho certeza","Nunca ouvi"]},
+     {id:"used",type:"radio",q:"Você já usou plataforma de crédito digital com IA?",req:true,opts:["Sim","Não","Não tenho certeza"]},
+     {id:"platform",type:"text",q:"Se sim, qual plataforma? (ex: Nubank, Creditas)",req:false},
+     {id:"understand",type:"scale",q:"Quão bem você entende como a IA decide sua pontuação?",req:true,min:1,max:5,lo:"Nada",hi:"Muito bem"},
+     {id:"fair",type:"scale",q:"Quão justa você acha a pontuação de crédito por IA para pessoas como você?",req:true,min:1,max:5,lo:"Muito injusta",hi:"Muito justa"},
+     {id:"trust_ai",type:"scale",q:"Quanto você confia em sistemas de IA para decisões de crédito?",req:true,min:1,max:5,lo:"Sem confiança",hi:"Plena confiança"}],
+    [{id:"reg_aware",type:"radio",q:"Você conhece leis que regulam a pontuação de crédito por IA no seu país?",req:true,opts:["Sim","Ouvi algo","Não","Não tenho certeza"]},
+     {id:"reg_trust",type:"scale",q:"Quanto você confia nas instituições que supervisionam IA financeira no seu país?",req:true,min:1,max:5,lo:"Sem confiança",hi:"Plena confiança"},
+     {id:"data_prot",type:"scale",q:"Quão bem seus dados estão protegidos ao usar serviços financeiros digitais?",req:true,min:1,max:5,lo:"Nada protegido",hi:"Muito bem protegido"},
+     {id:"reg_need",type:"radio",q:"Você acha que é necessária mais regulação da IA de crédito no seu país?",req:true,opts:["Sim, definitivamente","Provavelmente sim","Não tenho certeza","Provavelmente não","Não, já é adequada"]},
+     {id:"concerns",type:"checkbox",q:"O que mais te preocupa na pontuação de crédito por IA?",req:false,opts:["Meus dados podem ser usados indevidamente","A IA pode discriminar pessoas como eu","Não entendo como as decisões são tomadas","Não há a quem reclamar","Taxas de juros altas","Não tenho preocupações","Outro"]}],
+    [{id:"fin_lit",type:"scale",q:"Quão confiante você se sente em entender produtos financeiros como empréstimos e taxas de juros?",req:true,min:1,max:5,lo:"Nada confiante",hi:"Muito confiante"},
+     {id:"choice",type:"radio",q:"Você sente que tem opções suficientes de credores na sua região?",req:true,opts:["Sim, muitas opções","Algumas opções, mas limitadas","Muito poucas opções","Não sei quais opções existem"]},
+     {id:"switch",type:"radio",q:"Você já mudou de provedor financeiro por causa de um produto de IA melhor?",req:true,opts:["Sim","Não","Não sabia que podia fazer isso"]},
+     {id:"info",type:"checkbox",q:"Onde você busca informações sobre produtos financeiros?",req:false,opts:["Família e amigos","Redes sociais","TV ou rádio","Diretamente no banco","Comunidade ou grupo religioso","Notificações de apps","Geralmente não busco"]}],
+    [{id:"impact",type:"radio",q:"No geral, a IA de crédito melhorou ou piorou seu acesso ao crédito?",req:true,opts:["Melhorou muito","Melhorou um pouco","Sem mudança","Piorou um pouco","Piorou muito","Nunca usei IA de crédito"]},
+     {id:"inclusion",type:"scale",q:"Quanto a IA de crédito ajudou pessoas como você a acessar serviços que antes não tinham?",req:true,min:1,max:5,lo:"Nada",hi:"Muito"},
+     {id:"recommend",type:"scale",q:"Quão provável é que você recomende uma plataforma de crédito por IA para alguém?",req:true,min:1,max:5,lo:"Improvável",hi:"Muito provável"},
+     {id:"improve",type:"checkbox",q:"O que te faria confiar mais na pontuação de crédito por IA?",req:false,opts:["Mais transparência nas decisões","Regulação mais forte","Juros menores","Melhor suporte ao cliente","Mais educação financeira","Proteção contra uso indevido de dados","Nada — já confio","Outro"]},
+     {id:"comments",type:"textarea",q:"Tem mais algum comentário sobre sua experiência com IA de crédito no Brasil?",req:false}]
+  ]
+},
+es:{
+  tag:"Encuesta de Doctorado · Universidad Lincoln",
+  title:"Puntuación de Crédito con IA & Inclusión Financiera",
+  desc:"Esta encuesta es parte de un estudio doctoral sobre cómo la puntuación de crédito con IA afecta la inclusión financiera. Sus respuestas son completamente anónimas y tomarán unos 8–10 minutos.",
+  b:["⏱ 8–10 min","🔒 Anónimo","🌍 9 países","Supervisado por Prof. Christopher Gan"],
+  back:"← Atrás",next:"Siguiente →",submit:"Enviar ✓",
+  required:"Por favor, responda todas las preguntas obligatorias (*) antes de continuar.",
+  of:"Sección",of2:"de",
+  consent_note:"Esta encuesta se realiza para investigación doctoral en la Universidad Lincoln, Nueva Zelanda. Sus respuestas son completamente anónimas. Puede detenerse en cualquier momento.",
+  success_title:"¡Gracias! Su respuesta ha sido registrada.",
+  success_msg:"Su aporte contribuirá a la investigación doctoral sobre puntuación de crédito con IA e inclusión financiera. Le agradecemos mucho su tiempo.",
+  success_foot:"Supervisado por el Profesor Christopher Gan · Universidad Lincoln, Nueva Zelanda",
+  declined_title:"Gracias por su tiempo.",
+  declined_msg:"Ha optado por no participar. Respetamos su decisión.",
+  sections:[
+    {title:"Consentimiento y Contexto",sub:"Sección A — Sobre usted y su país"},
+    {title:"Acceso Financiero",sub:"Sección B — Su acceso actual a servicios financieros"},
+    {title:"Conciencia sobre IA",sub:"Sección C — Lo que sabe sobre la puntuación de crédito con IA"},
+    {title:"Regulación e Instituciones",sub:"Sección D — Su opinión sobre reglas y supervisión"},
+    {title:"Educación Financiera",sub:"Sección E — Sus conocimientos y opciones financieras"},
+    {title:"Impacto y Sugerencias",sub:"Sección F — Cómo la IA de crédito le ha afectado"},
+  ],
+  questions:[
+    [{id:"country",type:"select",q:"¿En qué país vive?",req:true,opts:["Nigeria","Ghana","Kenia","Brasil","México","Perú","Malasia","Vietnam","Bangladesh","Otro"]},
+     {id:"area",type:"radio",q:"¿Dónde vive principalmente?",req:true,opts:["Urbano (ciudad)","Periurbano (periferia)","Rural (campo)"]},
+     {id:"age",type:"radio",q:"¿Cuál es su grupo de edad?",req:true,opts:["18–24","25–34","35–44","45–54","55 o más"]},
+     {id:"gender",type:"radio",q:"¿Cuál es su género?",req:false,opts:["Masculino","Femenino","Prefiero no decir","Otro"]},
+     {id:"education",type:"radio",q:"¿Cuál es su nivel de educación más alto?",req:true,opts:["Educación primaria","Educación secundaria","Formación técnica/vocacional","Grado universitario","Posgrado"]},
+     {id:"employment",type:"radio",q:"¿Cuál describe mejor su empleo?",req:true,opts:["Empleado formal (asalariado)","Autónomo / empresario","Trabajador informal","Estudiante","Desempleado","Otro"]},
+     {id:"consent",type:"radio",q:"Entiendo que esta encuesta es voluntaria, mis respuestas son anónimas y doy mi consentimiento para participar.",req:true,opts:["Sí, acepto participar","No, no deseo participar"]}],
+    [{id:"bank",type:"radio",q:"¿Tiene una cuenta bancaria?",req:true,opts:["Sí, en un banco formal","Sí, solo en un proveedor de dinero móvil","No tengo ninguna cuenta"]},
+     {id:"credit",type:"radio",q:"¿Ha solicitado alguna vez un préstamo o crédito?",req:true,opts:["Sí, y lo recibí","Sí, pero fui rechazado","Nunca he solicitado","No, pero me gustaría"]},
+     {id:"reject",type:"radio",q:"Si fue rechazado, ¿cuál fue la razón principal?",req:false,opts:["Sin historial crediticio","Sin garantía","Empleo informal","Ingresos muy bajos","No entendí el proceso","Ninguna razón específica","No aplica"]},
+     {id:"mobile",type:"radio",q:"¿Con qué frecuencia usa dinero móvil (ej: Yape, OXXO Pay)?",req:true,opts:["A diario","Varias veces a la semana","Varias veces al mes","Raramente","Nunca"]},
+     {id:"digisvc",type:"checkbox",q:"¿Qué servicios financieros digitales ha usado?",req:false,opts:["Transferencias de dinero móvil","Ahorro digital","Préstamos por celular","Compra ahora, paga después","Pagos por código QR","Seguro digital","Ninguno de los anteriores"]}],
+    [{id:"aware",type:"radio",q:"¿Ha oído hablar de la puntuación de crédito con IA — donde un algoritmo decide si califica para un préstamo?",req:true,opts:["Sí, sé lo que es","Lo he escuchado pero no estoy seguro","No lo he escuchado"]},
+     {id:"used",type:"radio",q:"¿Ha usado alguna plataforma de préstamos digitales con IA?",req:true,opts:["Sí","No","No estoy seguro"]},
+     {id:"platform",type:"text",q:"Si respondió sí, ¿qué plataforma? (ej: Konfio, Kueski, Yape)",req:false},
+     {id:"understand",type:"scale",q:"¿Qué tan bien entiende cómo la IA decide su puntuación de crédito?",req:true,min:1,max:5,lo:"Para nada",hi:"Muy bien"},
+     {id:"fair",type:"scale",q:"¿Qué tan justa le parece la puntuación de crédito con IA para personas como usted?",req:true,min:1,max:5,lo:"Muy injusta",hi:"Muy justa"},
+     {id:"trust_ai",type:"scale",q:"¿Cuánto confía en los sistemas de IA para tomar decisiones de crédito justas?",req:true,min:1,max:5,lo:"Sin confianza",hi:"Plena confianza"}],
+    [{id:"reg_aware",type:"radio",q:"¿Conoce leyes que regulen la puntuación de crédito con IA en su país?",req:true,opts:["Sí","He escuchado algo","No","No estoy seguro"]},
+     {id:"reg_trust",type:"scale",q:"¿Cuánto confía en las instituciones que supervisan los sistemas de IA financiera en su país?",req:true,min:1,max:5,lo:"Sin confianza",hi:"Plena confianza"},
+     {id:"data_prot",type:"scale",q:"¿Qué tan bien cree que sus datos están protegidos al usar servicios financieros digitales?",req:true,min:1,max:5,lo:"Nada protegido",hi:"Muy bien protegido"},
+     {id:"reg_need",type:"radio",q:"¿Cree que se necesita más regulación de la IA de crédito en su país?",req:true,opts:["Sí, definitivamente","Probablemente sí","No estoy seguro","Probablemente no","No, ya es adecuada"]},
+     {id:"concerns",type:"checkbox",q:"¿Qué le preocupa más de la puntuación de crédito con IA?",req:false,opts:["Mis datos podrían usarse mal","La IA podría discriminarme","No entiendo cómo se toman las decisiones","No hay a quién quejarse","Tasas de interés altas","No tengo preocupaciones","Otro"]}],
+    [{id:"fin_lit",type:"scale",q:"¿Qué tan seguro se siente al entender productos financieros como préstamos y tasas de interés?",req:true,min:1,max:5,lo:"Nada seguro",hi:"Muy seguro"},
+     {id:"choice",type:"radio",q:"¿Siente que tiene suficientes opciones de prestamistas en su área?",req:true,opts:["Sí, muchas opciones","Algunas opciones pero limitadas","Muy pocas opciones","No sé qué opciones hay"]},
+     {id:"switch",type:"radio",q:"¿Alguna vez cambió de proveedor financiero por un mejor producto de IA?",req:true,opts:["Sí","No","No sabía que podía hacerlo"]},
+     {id:"info",type:"checkbox",q:"¿Dónde obtiene información sobre productos financieros?",req:false,opts:["Familia y amigos","Redes sociales","TV o radio","Directamente en el banco","Comunidad o grupo religioso","Notificaciones de apps","Generalmente no busco"]}],
+    [{id:"impact",type:"radio",q:"En general, ¿la IA de crédito ha mejorado o empeorado su acceso al crédito?",req:true,opts:["Mejoró mucho","Mejoró un poco","Sin cambio","Empeoró un poco","Empeoró mucho","No he usado IA de crédito"]},
+     {id:"inclusion",type:"scale",q:"¿Cuánto ha ayudado la IA de crédito a personas como usted a acceder a servicios financieros?",req:true,min:1,max:5,lo:"Para nada",hi:"Mucho"},
+     {id:"recommend",type:"scale",q:"¿Qué tan probable es que recomiende una plataforma de crédito con IA a alguien de su comunidad?",req:true,min:1,max:5,lo:"Poco probable",hi:"Muy probable"},
+     {id:"improve",type:"checkbox",q:"¿Qué le haría confiar más en la puntuación de crédito con IA?",req:false,opts:["Más transparencia en las decisiones","Regulación más fuerte","Tasas de interés más bajas","Mejor atención al cliente","Más educación financiera","Protección contra uso indebido de datos","Nada — ya confío","Otro"]},
+     {id:"comments",type:"textarea",q:"¿Tiene algún comentario sobre su experiencia con IA de crédito en su país?",req:false}]
+  ]
+},
+ms:{
+  tag:"Kajian PhD · Universiti Lincoln",
+  title:"Penilaian Kredit AI & Kewangan Inklusif",
+  desc:"Kajian ini adalah sebahagian daripada penyelidikan PhD tentang bagaimana penilaian kredit AI mempengaruhi kewangan inklusif. Jawapan anda adalah sepenuhnya tanpa nama dan mengambil masa 8–10 minit.",
+  b:["⏱ 8–10 min","🔒 Tanpa nama","🌍 9 negara","Diselia oleh Prof. Christopher Gan"],
+  back:"← Kembali",next:"Seterusnya →",submit:"Hantar ✓",
+  required:"Sila jawab semua soalan wajib (*) sebelum meneruskan.",
+  of:"Bahagian",of2:"daripada",
+  consent_note:"Kajian ini dijalankan untuk penyelidikan PhD di Universiti Lincoln, New Zealand. Jawapan anda adalah sepenuhnya tanpa nama. Anda boleh berhenti pada bila-bila masa.",
+  success_title:"Terima kasih! Jawapan anda telah direkodkan.",
+  success_msg:"Sumbangan anda akan membantu penyelidikan PhD tentang penilaian kredit AI. Kami sangat berterima kasih atas masa anda.",
+  success_foot:"Diselia oleh Profesor Christopher Gan · Universiti Lincoln, New Zealand",
+  declined_title:"Terima kasih atas masa anda.",
+  declined_msg:"Anda memilih untuk tidak menyertai. Kami menghormati keputusan anda.",
+  sections:[
+    {title:"Persetujuan & Latar Belakang",sub:"Bahagian A — Tentang anda dan negara anda"},
+    {title:"Akses Kewangan",sub:"Bahagian B — Akses anda kepada perkhidmatan kewangan"},
+    {title:"Kesedaran tentang AI",sub:"Bahagian C — Apa yang anda tahu tentang penilaian kredit AI"},
+    {title:"Peraturan & Institusi",sub:"Bahagian D — Pandangan anda tentang peraturan"},
+    {title:"Literasi Kewangan",sub:"Bahagian E — Pengetahuan dan pilihan kewangan anda"},
+    {title:"Kesan & Cadangan",sub:"Bahagian F — Bagaimana AI kredit mempengaruhi anda"},
+  ],
+  questions:[
+    [{id:"country",type:"select",q:"Di negara mana anda tinggal?",req:true,opts:["Nigeria","Ghana","Kenya","Brazil","Mexico","Peru","Malaysia","Vietnam","Bangladesh","Lain-lain"]},
+     {id:"area",type:"radio",q:"Di mana anda tinggal?",req:true,opts:["Bandar","Pinggir bandar","Luar bandar"]},
+     {id:"age",type:"radio",q:"Apakah kumpulan umur anda?",req:true,opts:["18–24","25–34","35–44","45–54","55 ke atas"]},
+     {id:"gender",type:"radio",q:"Apakah jantina anda?",req:false,opts:["Lelaki","Perempuan","Lebih suka tidak menyatakan","Lain-lain"]},
+     {id:"education",type:"radio",q:"Apakah tahap pendidikan tertinggi anda?",req:true,opts:["Sekolah rendah","Sekolah menengah","Latihan vokasional/teknikal","Ijazah universiti","Pascasiswazah"]},
+     {id:"employment",type:"radio",q:"Apakah pekerjaan anda?",req:true,opts:["Pekerja formal (bergaji)","Bekerja sendiri / pemilik perniagaan","Pekerja tidak formal","Pelajar","Penganggur","Lain-lain"]},
+     {id:"consent",type:"radio",q:"Saya faham kajian ini adalah sukarela, jawapan saya adalah tanpa nama, dan saya bersetuju untuk menyertai.",req:true,opts:["Ya, saya bersetuju menyertai","Tidak, saya tidak mahu menyertai"]}],
+    [{id:"bank",type:"radio",q:"Adakah anda mempunyai akaun bank?",req:true,opts:["Ya, di bank formal","Ya, hanya di penyedia wang mudah alih","Tidak, saya tidak mempunyai akaun"]},
+     {id:"credit",type:"radio",q:"Pernahkah anda memohon pinjaman atau kredit?",req:true,opts:["Ya, dan saya mendapatnya","Ya, tetapi saya ditolak","Tidak pernah memohon","Tidak, tetapi saya ingin"]},
+     {id:"reject",type:"radio",q:"Jika ditolak, apakah sebab utamanya?",req:false,opts:["Tiada sejarah kredit","Tiada cagaran","Pekerjaan tidak formal","Pendapatan terlalu rendah","Tidak faham prosesnya","Tiada sebab khusus","Tidak berkaitan"]},
+     {id:"mobile",type:"radio",q:"Berapa kerap anda menggunakan wang mudah alih (cth: Touch 'n Go, Boost)?",req:true,opts:["Setiap hari","Beberapa kali seminggu","Beberapa kali sebulan","Jarang","Tidak pernah"]},
+     {id:"digisvc",type:"checkbox",q:"Perkhidmatan kewangan digital mana yang pernah anda gunakan?",req:false,opts:["Pemindahan wang mudah alih","Simpanan digital","Pinjaman mudah alih","Beli sekarang, bayar kemudian","Pembayaran kod QR","Insurans digital","Tiada daripada di atas"]}],
+    [{id:"aware",type:"radio",q:"Pernahkah anda mendengar tentang penilaian kredit AI — di mana algoritma menentukan sama ada anda layak mendapat pinjaman?",req:true,opts:["Ya, saya tahu apa itu","Pernah dengar tapi tidak pasti","Tidak pernah dengar"]},
+     {id:"used",type:"radio",q:"Pernahkah anda menggunakan platform pinjaman digital yang menggunakan AI?",req:true,opts:["Ya","Tidak","Tidak pasti"]},
+     {id:"platform",type:"text",q:"Jika ya, platform mana? (cth: Aeon Credit, RHB, CIMB)",req:false},
+     {id:"understand",type:"scale",q:"Seberapa baik anda faham bagaimana AI menentukan skor kredit anda?",req:true,min:1,max:5,lo:"Langsung tidak faham",hi:"Sangat faham"},
+     {id:"fair",type:"scale",q:"Seberapa adil penilaian kredit AI bagi orang seperti anda?",req:true,min:1,max:5,lo:"Sangat tidak adil",hi:"Sangat adil"},
+     {id:"trust_ai",type:"scale",q:"Seberapa percaya anda kepada sistem AI untuk membuat keputusan kredit yang adil?",req:true,min:1,max:5,lo:"Tidak percaya langsung",hi:"Sangat percaya"}],
+    [{id:"reg_aware",type:"radio",q:"Adakah anda sedar tentang undang-undang yang mengawal penilaian kredit AI di negara anda?",req:true,opts:["Ya","Pernah dengar sesuatu","Tidak","Tidak pasti"]},
+     {id:"reg_trust",type:"scale",q:"Seberapa percaya anda kepada institusi yang mengawasi sistem AI kewangan?",req:true,min:1,max:5,lo:"Tidak percaya",hi:"Sangat percaya"},
+     {id:"data_prot",type:"scale",q:"Seberapa baik data anda dilindungi semasa menggunakan perkhidmatan kewangan digital?",req:true,min:1,max:5,lo:"Tidak dilindungi",hi:"Sangat dilindungi"},
+     {id:"reg_need",type:"radio",q:"Adakah anda rasa perlu peraturan yang lebih ketat terhadap AI kredit?",req:true,opts:["Ya, sangat perlu","Mungkin ya","Tidak pasti","Mungkin tidak","Tidak, sudah mencukupi"]},
+     {id:"concerns",type:"checkbox",q:"Apa yang paling membimbangkan anda tentang penilaian kredit AI?",req:false,opts:["Data saya boleh disalahgunakan","AI mungkin mendiskriminasi saya","Tidak faham cara keputusan dibuat","Tiada tempat untuk aduan","Kadar faedah tinggi","Tiada kebimbangan","Lain-lain"]}],
+    [{id:"fin_lit",type:"scale",q:"Seberapa yakin anda memahami produk kewangan seperti pinjaman dan kadar faedah?",req:true,min:1,max:5,lo:"Tidak yakin langsung",hi:"Sangat yakin"},
+     {id:"choice",type:"radio",q:"Adakah anda rasa ada pilihan pemberi pinjaman yang mencukupi di kawasan anda?",req:true,opts:["Ya, banyak pilihan","Ada beberapa tetapi terhad","Sangat sedikit pilihan","Tidak tahu pilihan apa yang ada"]},
+     {id:"switch",type:"radio",q:"Pernahkah anda menukar penyedia kewangan kerana produk AI yang lebih baik?",req:true,opts:["Ya","Tidak","Tidak tahu boleh berbuat demikian"]},
+     {id:"info",type:"checkbox",q:"Di mana anda mendapat maklumat tentang produk kewangan?",req:false,opts:["Keluarga dan rakan","Media sosial","TV atau radio","Terus dari bank","Komuniti atau kumpulan agama","Notifikasi aplikasi","Biasanya tidak mencari"]}],
+    [{id:"impact",type:"radio",q:"Secara keseluruhan, adakah AI kredit meningkatkan atau memburukkan akses kredit anda?",req:true,opts:["Meningkat banyak","Meningkat sedikit","Tiada perubahan","Merosot sedikit","Merosot banyak","Tidak pernah guna AI kredit"]},
+     {id:"inclusion",type:"scale",q:"Sejauh mana AI kredit membantu orang seperti anda mengakses perkhidmatan kewangan?",req:true,min:1,max:5,lo:"Langsung tidak membantu",hi:"Sangat membantu"},
+     {id:"recommend",type:"scale",q:"Seberapa mungkin anda mengesyorkan platform kredit AI kepada seseorang di komuniti anda?",req:true,min:1,max:5,lo:"Tidak mungkin",hi:"Sangat mungkin"},
+     {id:"improve",type:"checkbox",q:"Apa yang akan membuat anda lebih mempercayai penilaian kredit AI?",req:false,opts:["Lebih telus dalam keputusan","Peraturan kerajaan yang lebih ketat","Kadar faedah lebih rendah","Sokongan pelanggan lebih baik","Lebih banyak pendidikan kewangan","Perlindungan data","Tiada — saya sudah percaya","Lain-lain"]},
+     {id:"comments",type:"textarea",q:"Ada komen lain tentang pengalaman anda dengan AI kredit di Malaysia?",req:false}]
+  ]
+},
+vi:{
+  tag:"Khảo sát Tiến sĩ · Đại học Lincoln",
+  title:"Chấm điểm Tín dụng AI & Tài chính Toàn diện",
+  desc:"Khảo sát này là một phần của nghiên cứu tiến sĩ về cách chấm điểm tín dụng AI ảnh hưởng đến tài chính toàn diện. Câu trả lời của bạn hoàn toàn ẩn danh và mất khoảng 8–10 phút.",
+  b:["⏱ 8–10 phút","🔒 Ẩn danh","🌍 9 quốc gia","Giám sát bởi GS. Christopher Gan"],
+  back:"← Quay lại",next:"Tiếp theo →",submit:"Gửi ✓",
+  required:"Vui lòng trả lời tất cả các câu hỏi bắt buộc (*) trước khi tiếp tục.",
+  of:"Phần",of2:"của",
+  consent_note:"Khảo sát này được thực hiện cho nghiên cứu tiến sĩ tại Đại học Lincoln, New Zealand. Câu trả lời của bạn hoàn toàn ẩn danh. Bạn có thể dừng lại bất cứ lúc nào.",
+  success_title:"Cảm ơn bạn! Câu trả lời của bạn đã được ghi lại.",
+  success_msg:"Đóng góp của bạn sẽ giúp nghiên cứu tiến sĩ về chấm điểm tín dụng AI. Chúng tôi rất biết ơn thời gian của bạn.",
+  success_foot:"Giám sát bởi Giáo sư Christopher Gan · Đại học Lincoln, New Zealand",
+  declined_title:"Cảm ơn thời gian của bạn.",
+  declined_msg:"Bạn đã chọn không tham gia. Chúng tôi tôn trọng quyết định của bạn.",
+  sections:[
+    {title:"Đồng ý & Thông tin cơ bản",sub:"Phần A — Về bạn và quốc gia của bạn"},
+    {title:"Tiếp cận Tài chính",sub:"Phần B — Khả năng tiếp cận dịch vụ tài chính hiện tại"},
+    {title:"Nhận thức về AI",sub:"Phần C — Bạn biết gì về chấm điểm tín dụng AI"},
+    {title:"Quy định & Thể chế",sub:"Phần D — Quan điểm của bạn về quy định"},
+    {title:"Hiểu biết Tài chính",sub:"Phần E — Kiến thức và lựa chọn tài chính của bạn"},
+    {title:"Tác động & Đề xuất",sub:"Phần F — AI tín dụng đã ảnh hưởng đến bạn như thế nào"},
+  ],
+  questions:[
+    [{id:"country",type:"select",q:"Bạn sống ở quốc gia nào?",req:true,opts:["Nigeria","Ghana","Kenya","Brazil","Mexico","Peru","Malaysia","Việt Nam","Bangladesh","Khác"]},
+     {id:"area",type:"radio",q:"Bạn sống ở đâu?",req:true,opts:["Thành thị","Ngoại ô","Nông thôn"]},
+     {id:"age",type:"radio",q:"Nhóm tuổi của bạn?",req:true,opts:["18–24","25–34","35–44","45–54","55 tuổi trở lên"]},
+     {id:"gender",type:"radio",q:"Giới tính của bạn?",req:false,opts:["Nam","Nữ","Không muốn nói","Khác"]},
+     {id:"education",type:"radio",q:"Trình độ học vấn cao nhất của bạn?",req:true,opts:["Tiểu học","Trung học","Đào tạo nghề/kỹ thuật","Đại học","Sau đại học"]},
+     {id:"employment",type:"radio",q:"Tình trạng việc làm của bạn?",req:true,opts:["Làm việc chính thức (lương)","Tự kinh doanh","Lao động phi chính thức","Học sinh/sinh viên","Thất nghiệp","Khác"]},
+     {id:"consent",type:"radio",q:"Tôi hiểu rằng khảo sát này là tự nguyện, câu trả lời của tôi ẩn danh và tôi đồng ý tham gia.",req:true,opts:["Có, tôi đồng ý tham gia","Không, tôi không muốn tham gia"]}],
+    [{id:"bank",type:"radio",q:"Bạn có tài khoản ngân hàng không?",req:true,opts:["Có, tại ngân hàng chính thức","Có, chỉ tại nhà cung cấp tiền di động","Không có tài khoản"]},
+     {id:"credit",type:"radio",q:"Bạn đã từng đăng ký vay tiền chưa?",req:true,opts:["Có và tôi đã nhận được","Có nhưng bị từ chối","Chưa bao giờ đăng ký","Chưa, nhưng muốn"]},
+     {id:"reject",type:"radio",q:"Nếu bị từ chối, lý do chính là gì?",req:false,opts:["Không có lịch sử tín dụng","Không có tài sản đảm bảo","Việc làm phi chính thức","Thu nhập quá thấp","Không hiểu quy trình","Không có lý do cụ thể","Không áp dụng"]},
+     {id:"mobile",type:"radio",q:"Bạn sử dụng tiền di động (ví dụ: MoMo, ZaloPay) thường xuyên không?",req:true,opts:["Hàng ngày","Vài lần mỗi tuần","Vài lần mỗi tháng","Hiếm khi","Không bao giờ"]},
+     {id:"digisvc",type:"checkbox",q:"Bạn đã sử dụng dịch vụ tài chính kỹ thuật số nào?",req:false,opts:["Chuyển tiền di động","Tiết kiệm kỹ thuật số","Vay qua điện thoại","Mua trước trả sau","Thanh toán mã QR","Bảo hiểm kỹ thuật số","Không có"]}],
+    [{id:"aware",type:"radio",q:"Bạn đã nghe về chấm điểm tín dụng AI — nơi thuật toán quyết định bạn có đủ điều kiện vay không?",req:true,opts:["Có, tôi biết","Đã nghe nhưng không chắc","Chưa nghe"]},
+     {id:"used",type:"radio",q:"Bạn đã sử dụng nền tảng cho vay kỹ thuật số dùng AI chưa?",req:true,opts:["Rồi","Chưa","Không chắc"]},
+     {id:"platform",type:"text",q:"Nếu có, nền tảng nào? (ví dụ: MoMo, VPBank NEO, Tima)",req:false},
+     {id:"understand",type:"scale",q:"Bạn hiểu AI quyết định điểm tín dụng của bạn như thế nào?",req:true,min:1,max:5,lo:"Không hiểu gì",hi:"Hiểu rất rõ"},
+     {id:"fair",type:"scale",q:"AI chấm điểm tín dụng có công bằng với người như bạn không?",req:true,min:1,max:5,lo:"Rất không công bằng",hi:"Rất công bằng"},
+     {id:"trust_ai",type:"scale",q:"Bạn tin tưởng hệ thống AI đưa ra quyết định tín dụng công bằng đến mức nào?",req:true,min:1,max:5,lo:"Không tin tưởng",hi:"Hoàn toàn tin tưởng"}],
+    [{id:"reg_aware",type:"radio",q:"Bạn có biết về luật điều chỉnh chấm điểm tín dụng AI ở nước bạn không?",req:true,opts:["Có","Đã nghe gì đó","Không","Không chắc"]},
+     {id:"reg_trust",type:"scale",q:"Bạn tin tưởng các cơ quan giám sát hệ thống AI tài chính ở nước bạn đến mức nào?",req:true,min:1,max:5,lo:"Không tin",hi:"Rất tin"},
+     {id:"data_prot",type:"scale",q:"Dữ liệu của bạn được bảo vệ tốt như thế nào khi dùng dịch vụ tài chính kỹ thuật số?",req:true,min:1,max:5,lo:"Không được bảo vệ",hi:"Được bảo vệ rất tốt"},
+     {id:"reg_need",type:"radio",q:"Bạn có nghĩ cần quy định chặt chẽ hơn về AI tín dụng không?",req:true,opts:["Có, chắc chắn","Có lẽ có","Không chắc","Có lẽ không","Không, đã đủ rồi"]},
+     {id:"concerns",type:"checkbox",q:"Điều gì khiến bạn lo ngại nhất về chấm điểm tín dụng AI?",req:false,opts:["Dữ liệu bị lạm dụng","AI có thể phân biệt đối xử","Không hiểu cách quyết định","Không có nơi để khiếu nại","Lãi suất cao","Không lo ngại","Khác"]}],
+    [{id:"fin_lit",type:"scale",q:"Bạn tự tin đến mức nào trong việc hiểu các sản phẩm tài chính như vay và lãi suất?",req:true,min:1,max:5,lo:"Không tự tin",hi:"Rất tự tin"},
+     {id:"choice",type:"radio",q:"Bạn có cảm thấy có đủ lựa chọn nhà cho vay trong khu vực của mình không?",req:true,opts:["Có, nhiều lựa chọn","Có một số nhưng hạn chế","Rất ít lựa chọn","Không biết có lựa chọn nào"]},
+     {id:"switch",type:"radio",q:"Bạn đã từng chuyển sang nhà cung cấp tài chính khác vì sản phẩm AI tốt hơn không?",req:true,opts:["Rồi","Chưa","Không biết có thể làm vậy"]},
+     {id:"info",type:"checkbox",q:"Bạn lấy thông tin về sản phẩm tài chính từ đâu?",req:false,opts:["Gia đình và bạn bè","Mạng xã hội","TV hoặc đài phát thanh","Trực tiếp từ ngân hàng","Cộng đồng hoặc nhóm tôn giáo","Thông báo ứng dụng","Thường không tìm kiếm"]}],
+    [{id:"impact",type:"radio",q:"Nhìn chung, AI tín dụng đã cải thiện hay làm xấu đi khả năng tiếp cận tín dụng của bạn?",req:true,opts:["Cải thiện nhiều","Cải thiện một chút","Không thay đổi","Xấu hơn một chút","Xấu hơn nhiều","Chưa dùng AI tín dụng"]},
+     {id:"inclusion",type:"scale",q:"AI tín dụng đã giúp người như bạn tiếp cận dịch vụ tài chính đến mức nào?",req:true,min:1,max:5,lo:"Không giúp gì",hi:"Giúp rất nhiều"},
+     {id:"recommend",type:"scale",q:"Bạn có khả năng giới thiệu nền tảng tín dụng AI cho ai đó trong cộng đồng không?",req:true,min:1,max:5,lo:"Không có khả năng",hi:"Rất có khả năng"},
+     {id:"improve",type:"checkbox",q:"Điều gì sẽ khiến bạn tin tưởng AI tín dụng hơn?",req:false,opts:["Minh bạch hơn về quyết định","Quy định chính phủ chặt chẽ hơn","Lãi suất thấp hơn","Hỗ trợ khách hàng tốt hơn","Giáo dục tài chính nhiều hơn","Bảo vệ dữ liệu","Không cần — đã tin","Khác"]},
+     {id:"comments",type:"textarea",q:"Bạn có nhận xét gì khác về trải nghiệm AI tín dụng ở Việt Nam không?",req:false}]
+  ]
+},
+bn:{
+  tag:"পিএইচডি গবেষণা জরিপ · লিংকন বিশ্ববিদ্যালয়",
+  title:"এআই ক্রেডিট স্কোরিং ও আর্থিক অন্তর্ভুক্তি",
+  desc:"এই জরিপটি একটি পিএইচডি গবেষণার অংশ যা উন্নয়নশীল অর্থনীতিতে এআই ক্রেডিট স্কোরিং আর্থিক অন্তর্ভুক্তিকে কীভাবে প্রভাবিত করে তা পরীক্ষা করে। আপনার উত্তর সম্পূর্ণ বেনামী এবং প্রায় ৮–১০ মিনিট সময় নেবে।",
+  b:["⏱ ৮–১০ মিনিট","🔒 বেনামী","🌍 ৯টি দেশ","তত্ত্বাবধানে অধ্যাপক Christopher Gan"],
+  back:"← পেছনে",next:"পরবর্তী →",submit:"জমা দিন ✓",
+  required:"অনুগ্রহ করে চালিয়ে যাওয়ার আগে সমস্ত প্রয়োজনীয় প্রশ্নের (*) উত্তর দিন।",
+  of:"বিভাগ",of2:"এর মধ্যে",
+  consent_note:"এই জরিপটি নিউজিল্যান্ডের লিংকন বিশ্ববিদ্যালয়ে পিএইচডি গবেষণার জন্য পরিচালিত হচ্ছে। আপনার উত্তর সম্পূর্ণ বেনামী। আপনি যেকোনো সময় থামতে পারেন।",
+  success_title:"ধন্যবাদ! আপনার উত্তর রেকর্ড করা হয়েছে।",
+  success_msg:"আপনার অবদান এআই ক্রেডিট স্কোরিং ও আর্থিক অন্তর্ভুক্তি বিষয়ক পিএইচডি গবেষণায় সহায়তা করবে। আপনার সময়ের জন্য আমরা অত্যন্ত কৃতজ্ঞ।",
+  success_foot:"তত্ত্বাবধানে অধ্যাপক Christopher Gan · লিংকন বিশ্ববিদ্যালয়, নিউজিল্যান্ড",
+  declined_title:"আপনার সময়ের জন্য ধন্যবাদ।",
+  declined_msg:"আপনি অংশগ্রহণ না করার সিদ্ধান্ত নিয়েছেন। আমরা আপনার সিদ্ধান্তকে সম্মান করি।",
+  sections:[
+    {title:"সম্মতি ও পটভূমি",sub:"বিভাগ ক — আপনার ও আপনার দেশের সম্পর্কে"},
+    {title:"আর্থিক প্রবেশাধিকার",sub:"বিভাগ খ — আর্থিক পরিষেবায় আপনার বর্তমান প্রবেশাধিকার"},
+    {title:"এআই সম্পর্কে সচেতনতা",sub:"বিভাগ গ — এআই ক্রেডিট স্কোরিং সম্পর্কে আপনি কী জানেন"},
+    {title:"নিয়ন্ত্রণ ও প্রতিষ্ঠান",sub:"বিভাগ ঘ — নিয়ম ও তদারকি সম্পর্কে আপনার মতামত"},
+    {title:"আর্থিক সাক্ষরতা",sub:"বিভাগ ঙ — আপনার জ্ঞান ও আর্থিক পছন্দ"},
+    {title:"প্রভাব ও পরামর্শ",sub:"বিভাগ চ — এআই ক্রেডিট আপনাকে কীভাবে প্রভাবিত করেছে"},
+  ],
+  questions:[
+    [{id:"country",type:"select",q:"আপনি কোন দেশে বাস করেন?",req:true,opts:["নাইজেরিয়া","ঘানা","কেনিয়া","ব্রাজিল","মেক্সিকো","পেরু","মালয়েশিয়া","ভিয়েতনাম","বাংলাদেশ","অন্যান্য"]},
+     {id:"area",type:"radio",q:"আপনি প্রধানত কোথায় বাস করেন?",req:true,opts:["শহর","শহরতলী","গ্রাম"]},
+     {id:"age",type:"radio",q:"আপনার বয়সসীমা কোনটি?",req:true,opts:["১৮–২৪","২৫–৩৪","৩৫–৪৪","৪৫–৫৪","৫৫ বা তার বেশি"]},
+     {id:"gender",type:"radio",q:"আপনার লিঙ্গ কী?",req:false,opts:["পুরুষ","মহিলা","বলতে চাই না","অন্যান্য"]},
+     {id:"education",type:"radio",q:"আপনার সর্বোচ্চ শিক্ষাগত যোগ্যতা কী?",req:true,opts:["প্রাথমিক বিদ্যালয়","মাধ্যমিক বিদ্যালয়","কারিগরি/বৃত্তিমূলক প্রশিক্ষণ","বিশ্ববিদ্যালয় ডিগ্রি","স্নাতকোত্তর"]},
+     {id:"employment",type:"radio",q:"আপনার কর্মসংস্থান পরিস্থিতি কী?",req:true,opts:["আনুষ্ঠানিক চাকরি (বেতনভুক্ত)","স্ব-নিযুক্ত / ব্যবসায়ী","অনানুষ্ঠানিক শ্রমিক","শিক্ষার্থী","বেকার","অন্যান্য"]},
+     {id:"consent",type:"radio",q:"আমি বুঝতে পারছি এই জরিপটি স্বেচ্ছামূলক, আমার উত্তর বেনামী এবং আমি অংশগ্রহণে সম্মতি দিচ্ছি।",req:true,opts:["হ্যাঁ, আমি অংশগ্রহণে সম্মত","না, আমি অংশগ্রহণ করতে চাই না"]}],
+    [{id:"bank",type:"radio",q:"আপনার কি ব্যাংক অ্যাকাউন্ট আছে?",req:true,opts:["হ্যাঁ, একটি আনুষ্ঠানিক ব্যাংকে","হ্যাঁ, শুধুমাত্র মোবাইল মানি সেবায়","না, কোনো অ্যাকাউন্ট নেই"]},
+     {id:"credit",type:"radio",q:"আপনি কি কখনো ঋণ বা ক্রেডিটের আবেদন করেছেন?",req:true,opts:["হ্যাঁ, এবং পেয়েছি","হ্যাঁ, কিন্তু প্রত্যাখ্যাত হয়েছি","না, কখনো আবেদন করিনি","না, কিন্তু করতে চাই"]},
+     {id:"reject",type:"radio",q:"প্রত্যাখ্যাত হলে প্রধান কারণ কী ছিল?",req:false,opts:["কোনো ক্রেডিট ইতিহাস নেই","কোনো জামানত নেই","অনানুষ্ঠানিক কর্মসংস্থান","আয় অনেক কম","প্রক্রিয়া বুঝিনি","কোনো নির্দিষ্ট কারণ নেই","প্রযোজ্য নয়"]},
+     {id:"mobile",type:"radio",q:"আপনি মোবাইল মানি (যেমন bKash, Nagad) কতবার ব্যবহার করেন?",req:true,opts:["প্রতিদিন","সপ্তাহে কয়েকবার","মাসে কয়েকবার","কদাচিৎ","কখনো না"]},
+     {id:"digisvc",type:"checkbox",q:"আপনি কোন ডিজিটাল আর্থিক সেবা ব্যবহার করেছেন?",req:false,opts:["মোবাইল মানি ট্রান্সফার","ডিজিটাল সঞ্চয়","মোবাইল ঋণ","এখনই কিনুন, পরে পরিশোধ","QR কোড পেমেন্ট","ডিজিটাল বীমা","কোনোটিই না"]}],
+    [{id:"aware",type:"radio",q:"আপনি কি এআই ক্রেডিট স্কোরিং সম্পর্কে শুনেছেন — যেখানে একটি অ্যালগরিদম সিদ্ধান্ত নেয় আপনি ঋণ পাবেন কিনা?",req:true,opts:["হ্যাঁ, আমি জানি","শুনেছি কিন্তু নিশ্চিত নই","না, শুনিনি"]},
+     {id:"used",type:"radio",q:"আপনি কি এআই ব্যবহারকারী কোনো ডিজিটাল ঋণ প্ল্যাটফর্ম ব্যবহার করেছেন?",req:true,opts:["হ্যাঁ","না","নিশ্চিত নই"]},
+     {id:"platform",type:"text",q:"যদি হ্যাঁ, কোন প্ল্যাটফর্ম? (যেমন: bKash ক্রেডিট, Nagad)",req:false},
+     {id:"understand",type:"scale",q:"এআই কীভাবে আপনার ক্রেডিট স্কোর নির্ধারণ করে তা আপনি কতটা বোঝেন?",req:true,min:1,max:5,lo:"একদম বুঝি না",hi:"খুব ভালো বুঝি"},
+     {id:"fair",type:"scale",q:"আপনার মতো মানুষের জন্য এআই ক্রেডিট স্কোরিং কতটা ন্যায্য?",req:true,min:1,max:5,lo:"খুবই অন্যায্য",hi:"খুবই ন্যায্য"},
+     {id:"trust_ai",type:"scale",q:"ন্যায্য ক্রেডিট সিদ্ধান্ত নিতে এআই সিস্টেমকে আপনি কতটা বিশ্বাস করেন?",req:true,min:1,max:5,lo:"বিশ্বাস নেই",hi:"পূর্ণ বিশ্বাস"}],
+    [{id:"reg_aware",type:"radio",q:"আপনি কি আপনার দেশে এআই ক্রেডিট স্কোরিং নিয়ন্ত্রণকারী আইন সম্পর্কে জানেন?",req:true,opts:["হ্যাঁ","কিছু শুনেছি","না","নিশ্চিত নই"]},
+     {id:"reg_trust",type:"scale",q:"আপনার দেশে আর্থিক এআই সিস্টেম তদারকিকারী প্রতিষ্ঠানগুলিকে আপনি কতটা বিশ্বাস করেন?",req:true,min:1,max:5,lo:"বিশ্বাস নেই",hi:"পূর্ণ বিশ্বাস"},
+     {id:"data_prot",type:"scale",q:"ডিজিটাল আর্থিক সেবা ব্যবহার করার সময় আপনার ডেটা কতটা সুরক্ষিত?",req:true,min:1,max:5,lo:"মোটেই সুরক্ষিত নয়",hi:"খুবই সুরক্ষিত"},
+     {id:"reg_need",type:"radio",q:"আপনি কি মনে করেন আপনার দেশে এআই ক্রেডিটের কঠোর নিয়ন্ত্রণ প্রয়োজন?",req:true,opts:["হ্যাঁ, অবশ্যই","সম্ভবত হ্যাঁ","নিশ্চিত নই","সম্ভবত না","না, ইতিমধ্যে যথেষ্ট"]},
+     {id:"concerns",type:"checkbox",q:"এআই ক্রেডিট স্কোরিং সম্পর্কে আপনার সবচেয়ে বেশি উদ্বেগ কী?",req:false,opts:["আমার ডেটা অপব্যবহার হতে পারে","এআই আমার বিরুদ্ধে বৈষম্য করতে পারে","সিদ্ধান্ত কীভাবে নেওয়া হয় বুঝি না","অভিযোগ করার জায়গা নেই","উচ্চ সুদের হার","কোনো উদ্বেগ নেই","অন্যান্য"]}],
+    [{id:"fin_lit",type:"scale",q:"ঋণ ও সুদের হারের মতো আর্থিক পণ্য বোঝার ক্ষেত্রে আপনি কতটা আত্মবিশ্বাসী?",req:true,min:1,max:5,lo:"মোটেই আত্মবিশ্বাসী নই",hi:"খুবই আত্মবিশ্বাসী"},
+     {id:"choice",type:"radio",q:"আপনার এলাকায় কি পর্যাপ্ত ঋণদাতার পছন্দ আছে?",req:true,opts:["হ্যাঁ, অনেক বিকল্প","কিছু বিকল্প আছে তবে সীমিত","খুব কম বিকল্প","কী বিকল্প আছে জানি না"]},
+     {id:"switch",type:"radio",q:"আপনি কি কখনো ভালো এআই পণ্যের জন্য আর্থিক সেবাদাতা পরিবর্তন করেছেন?",req:true,opts:["হ্যাঁ","না","জানতাম না এটা করা যায়"]},
+     {id:"info",type:"checkbox",q:"আপনি আর্থিক পণ্য সম্পর্কে তথ্য কোথায় পান?",req:false,opts:["পরিবার ও বন্ধু","সোশ্যাল মিডিয়া","টিভি বা রেডিও","সরাসরি ব্যাংক থেকে","সম্প্রদায় বা ধর্মীয় গোষ্ঠী","অ্যাপ নোটিফিকেশন","সাধারণত খুঁজি না"]}],
+    [{id:"impact",type:"radio",q:"সামগ্রিকভাবে, এআই ক্রেডিট কি আপনার ঋণ পাওয়ার সুযোগ উন্নত বা খারাপ করেছে?",req:true,opts:["অনেক উন্নত হয়েছে","কিছুটা উন্নত হয়েছে","কোনো পরিবর্তন নেই","কিছুটা খারাপ হয়েছে","অনেক খারাপ হয়েছে","এআই ক্রেডিট ব্যবহার করিনি"]},
+     {id:"inclusion",type:"scale",q:"এআই ক্রেডিট আপনার মতো মানুষদের আর্থিক সেবায় কতটা সাহায্য করেছে?",req:true,min:1,max:5,lo:"মোটেই না",hi:"অনেক বেশি"},
+     {id:"recommend",type:"scale",q:"আপনার সম্প্রদায়ের কাউকে এআই ক্রেডিট প্ল্যাটফর্ম সুপারিশ করার সম্ভাবনা কতটুকু?",req:true,min:1,max:5,lo:"সম্ভাবনা নেই",hi:"অনেক বেশি সম্ভাবনা"},
+     {id:"improve",type:"checkbox",q:"কী আপনাকে এআই ক্রেডিট আরও বেশি বিশ্বাস করাবে?",req:false,opts:["সিদ্ধান্তে আরও স্বচ্ছতা","শক্তিশালী সরকারি নিয়ন্ত্রণ","কম সুদের হার","ভালো গ্রাহক সেবা","আরও আর্থিক শিক্ষা","ডেটা সুরক্ষা","কিছুই না — ইতিমধ্যে বিশ্বাস করি","অন্যান্য"]},
+     {id:"comments",type:"textarea",q:"বাংলাদেশে এআই ক্রেডিট অভিজ্ঞতা সম্পর্কে আর কিছু বলতে চান?",req:false}]
+  ]
+}
+};
+
+let lang='en';
+let cur=0;
+let ans={};
+
+function setLang(l){
+  lang=l;
+  document.querySelectorAll('.lang-btn').forEach(b=>b.classList.remove('active'));
+  event.target.classList.add('active');
+  updateHero();
+  render();
+}
+
+function updateHero(){
+  const t=T[lang];
+  document.getElementById('h-tag').textContent=t.tag;
+  document.getElementById('h-title').textContent=t.title;
+  document.getElementById('h-desc').textContent=t.desc;
+  t.b.forEach((b,i)=>{const el=document.getElementById('b'+(i+1));if(el)el.textContent=b;});
+}
+
+function render(){
+  const t=T[lang];
+  const sec=t.sections[cur];
+  const qs=t.questions[cur];
+  const pct=Math.round((cur/t.sections.length)*100);
+  document.getElementById('prog').style.width=pct+'%';
+  document.getElementById('prog-label').textContent=`${t.of} ${cur+1} ${t.of2} ${t.sections.length}`;
+
+  let html=`<div class="sec-hdr"><div class="sec-num">${cur+1}</div><div class="sec-title">${sec.title}</div></div>`;
+  html+=`<p class="sec-sub">${sec.sub}</p>`;
+  if(cur===0) html+=`<div class="consent-box">🔒 ${t.consent_note}</div>`;
+
+  qs.forEach(q=>{
+    html+=`<div class="qcard">`;
+    html+=`<div class="qlabel">${q.q}${q.req?'<span class="req"> *</span>':''}</div>`;
+    if(q.type==='radio'){
+      html+=`<div class="opts">`;
+      (q.opts||[]).forEach(o=>{
+        const s=ans[q.id]===o?'sel':'';
+        html+=`<div class="opt ${s}" onclick="pick('${q.id}','${o.replace(/['"]/g,'`')}',this)"><input type="radio" ${s?'checked':''} aria-label="${o}"> ${o}</div>`;
+      });
+      html+=`</div>`;
+    } else if(q.type==='select'){
+      html+=`<select onchange="ans['${q.id}']=this.value" aria-label="${q.q}"><option value="">—</option>`;
+      (q.opts||[]).forEach(o=>{ html+=`<option value="${o}" ${ans[q.id]===o?'selected':''}>${o}</option>`; });
+      html+=`</select>`;
+    } else if(q.type==='scale'){
+      html+=`<div class="scale-wrap"><div class="scale-row">`;
+      for(let i=q.min;i<=q.max;i++){
+        const s=ans[q.id]===i?'sel':'';
+        html+=`<div class="scb ${s}" onclick="pickScale('${q.id}',${i},this)">${i}</div>`;
+      }
+      html+=`</div><div class="scale-lbs"><span>${q.lo}</span><span>${q.hi}</span></div></div>`;
+    } else if(q.type==='text'){
+      html+=`<input type="text" value="${ans[q.id]||''}" placeholder="..." oninput="ans['${q.id}']=this.value" aria-label="${q.q}">`;
+    } else if(q.type==='textarea'){
+      html+=`<textarea oninput="ans['${q.id}']=this.value" aria-label="${q.q}">${ans[q.id]||''}</textarea>`;
+    } else if(q.type==='checkbox'){
+      const checked=ans[q.id]||[];
+      html+=`<div class="chk-group">`;
+      (q.opts||[]).forEach(o=>{
+        const c=checked.includes(o)?'chked':'';
+        html+=`<label class="chk-opt ${c}"><input type="checkbox" ${c?'checked':''} onchange="toggleChk('${q.id}','${o.replace(/['"]/g,'`')}',this)"> ${o}</label>`;
+      });
+      html+=`</div>`;
+    }
+    html+=`</div>`;
+  });
+
+  const isLast=cur===T[lang].sections.length-1;
+  html+=`<div class="nav">`;
+  html+=`<button class="btn" onclick="goBack()" ${cur===0?'disabled':''}>← ${T[lang].back.replace('← ','')}</button>`;
+  html+=`<span class="step-ind">${cur+1} / ${T[lang].sections.length}</span>`;
+  if(isLast){
+    html+=`<button class="btn primary" onclick="submit()">${T[lang].submit}</button>`;
+  } else {
+    html+=`<button class="btn primary" onclick="goNext()">${T[lang].next}</button>`;
+  }
+  html+=`</div>`;
+  document.getElementById('body').innerHTML=html;
+}
+
+function pick(id,val,el){
+  ans[id]=val;
+  el.closest('.opts').querySelectorAll('.opt').forEach(o=>o.classList.remove('sel'));
+  el.classList.add('sel');
+  if(id==='consent'&&val.startsWith('No')){
+    setTimeout(()=>{
+      document.getElementById('body').innerHTML=`<div class="declined" style="text-align:center;padding:40px 20px;background:#fff;border-radius:12px;border:1px solid #e0ddd6"><div style="font-size:40px;margin-bottom:16px">🙏</div><h2 style="font-size:18px;font-weight:600;margin-bottom:8px">${T[lang].declined_title}</h2><p style="font-size:14px;color:#555">${T[lang].declined_msg}</p></div>`;
+      document.getElementById('prog').style.width='100%';
+    },300);
+  }
+}
+
+function pickScale(id,val,el){
+  ans[id]=val;
+  el.parentElement.querySelectorAll('.scb').forEach(b=>b.classList.remove('sel'));
+  el.classList.add('sel');
+}
+
+function toggleChk(id,val,el){
+  if(!ans[id]) ans[id]=[];
+  if(el.checked){ if(!ans[id].includes(val)) ans[id].push(val); el.closest('label').classList.add('chked'); }
+  else { ans[id]=ans[id].filter(v=>v!==val); el.closest('label').classList.remove('chked'); }
+}
+
+function validate(){
+  const qs=T[lang].questions[cur];
+  for(const q of qs){
+    if(!q.req) continue;
+    const a=ans[q.id];
+    if(!a||(Array.isArray(a)&&a.length===0)||a==='') return false;
+  }
+  return true;
+}
+
+function goNext(){
+  if(!validate()){ alert(T[lang].required); return; }
+  cur++; render(); window.scrollTo(0,0);
+}
+
+function goBack(){ if(cur>0){ cur--; render(); window.scrollTo(0,0); } }
+
+function submit(){
+  if(!validate()){ alert(T[lang].required); return; }
+  document.getElementById('body').innerHTML=`<div class="success"><div class="icon">✅</div><h2>${T[lang].success_title}</h2><p>${T[lang].success_msg}</p><p style="margin-top:16px;font-size:12px;color:#888">${T[lang].success_foot}</p></div>`;
+  document.getElementById('prog').style.width='100%';
+}
+
+render();
+</script>
+</body>
+</html>
