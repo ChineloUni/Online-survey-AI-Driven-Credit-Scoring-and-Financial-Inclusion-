@@ -77,9 +77,9 @@ textarea{resize:vertical;min-height:80px}
   <div class="hero">
     <div class="hero-tag" id="h-tag">PhD Research Survey · Lincoln University</div>
     <h1 id="h-title">AI Credit Scoring & Financial Inclusion</h1>
-    <p id="h-desc">This survey is part of a PhD study examining how AI-driven credit scoring affects financial inclusion across developing economies. Your responses are completely anonymous and will take about 8–10 minutes.</p>
+    <p id="h-desc">This survey is part of a PhD study examining how AI-driven credit scoring affects financial inclusion across developing economies. Your responses are completely anonymous and will take about 15-20 minutes.</p>
     <div class="badges">
-      <span class="badge">⏱ 8–10 mins</span>
+      <span class="badge">⏱ 15-20 mins</span>
       <span class="badge">🔒 Anonymous</span>
       <span class="badge">🌍 9 countries</span>
       <span class="badge">Prof. Christopher Gan · Lincoln University</span>
@@ -97,7 +97,7 @@ textarea{resize:vertical;min-height:80px}
 const EQ = [
   // Section 0
   [{id:"country",type:"select",q:"Which country do you live in?",req:true,
-    opts:["Nigeria","Ghana","Kenya","Brazil","Mexico","Peru","Malaysia","Vietnam","Bangladesh","Other"]},
+    opts:["Nigeria","Ghana","Kenya","Brazil","Mexico","Peru","Malaysia","Vietnam","Bangladesh"]},
    {id:"area",type:"radio",q:"Where do you mainly live?",req:true,
     opts:["Urban (city or town centre)","Peri-urban (outskirts of a city)","Rural (village or countryside)"]},
    {id:"age",type:"radio",q:"What is your age group?",req:true,
@@ -162,7 +162,7 @@ const LANGS = {
 en:{
   tag:"PhD Research Survey · Lincoln University",
   title:"AI Credit Scoring & Financial Inclusion",
-  desc:"This survey is part of a PhD study examining how AI-driven credit scoring affects financial inclusion across developing economies. Your responses are completely anonymous and will take about 8–10 minutes.",
+  desc:"This survey is part of a PhD study examining how AI-driven credit scoring affects financial inclusion across developing economies. Your responses are completely anonymous and will take about 15-20 minutes.",
   consent_note:"This survey is for PhD research at Lincoln University, New Zealand. Responses are anonymous. You may stop at any time.",
   back:"Back",next:"Next",submit:"Submit",
   required:"Please answer all required questions (*) before continuing.",
@@ -186,7 +186,7 @@ en:{
 pt:{
   tag:"Pesquisa de Doutorado · Universidade Lincoln",
   title:"Pontuação de Crédito por IA & Inclusão Financeira",
-  desc:"Esta pesquisa faz parte de um estudo de doutorado. Suas respostas são anônimas e levam 8–10 minutos.",
+  desc:"Esta pesquisa faz parte de um estudo de doutorado. Suas respostas são anônimas e levam 15-20 minutos.",
   consent_note:"Esta pesquisa é para doutorado na Universidade Lincoln, Nova Zelândia. Respostas anônimas. Você pode parar a qualquer momento.",
   back:"Voltar",next:"Próximo",submit:"Enviar",
   required:"Por favor, responda todas as perguntas obrigatórias (*) antes de continuar.",
@@ -205,7 +205,7 @@ pt:{
     {title:"Impacto e Sugestões",sub:"Seção F — Como a IA de crédito afetou você"},
   ],
   opts:[
-    [["Nigéria","Gana","Quênia","Brasil","México","Peru","Malásia","Vietnã","Bangladesh","Outro"],
+    [["Nigéria","Gana","Quênia","Brasil","México","Peru","Malásia","Vietnã","Bangladesh"],
      ["Urbano (cidade)","Periurbano (periferia)","Rural (interior)"],
      ["18-24","25-34","35-44","45-54","55 ou mais"],
      ["Masculino","Feminino","Prefiro não dizer","Outro"],
@@ -237,7 +237,7 @@ pt:{
 es:{
   tag:"Encuesta de Doctorado · Universidad Lincoln",
   title:"Puntuación de Crédito con IA & Inclusión Financiera",
-  desc:"Esta encuesta es parte de un estudio doctoral. Sus respuestas son anónimas y tomarán 8–10 minutos.",
+  desc:"Esta encuesta es parte de un estudio doctoral. Sus respuestas son anónimas y tomarán 15-20 minutos.",
   consent_note:"Esta encuesta es para investigación doctoral en la Universidad Lincoln, Nueva Zelanda. Respuestas anónimas.",
   back:"Atrás",next:"Siguiente",submit:"Enviar",
   required:"Por favor, responda todas las preguntas obligatorias (*) antes de continuar.",
@@ -256,7 +256,7 @@ es:{
     {title:"Impacto y Sugerencias",sub:"Sección F — Cómo la IA de crédito le ha afectado"},
   ],
   opts:[
-    [["Nigeria","Ghana","Kenia","Brasil","México","Perú","Malasia","Vietnam","Bangladesh","Otro"],
+    [["Nigeria","Ghana","Kenia","Brasil","México","Perú","Malasia","Vietnam","Bangladesh"],
      ["Urbano (ciudad)","Periurbano (periferia)","Rural (campo)"],
      ["18-24","25-34","35-44","45-54","55 o más"],
      ["Masculino","Femenino","Prefiero no decir","Otro"],
@@ -288,7 +288,7 @@ es:{
 ms:{
   tag:"Kajian PhD · Universiti Lincoln",
   title:"Penilaian Kredit AI & Kewangan Inklusif",
-  desc:"Kajian ini adalah sebahagian daripada penyelidikan PhD. Jawapan anda tanpa nama dan mengambil masa 8–10 minit.",
+  desc:"Kajian ini adalah sebahagian daripada penyelidikan PhD. Jawapan anda tanpa nama dan mengambil masa 15-20 minit.",
   consent_note:"Kajian ini untuk penyelidikan PhD di Universiti Lincoln, New Zealand. Jawapan tanpa nama.",
   back:"Kembali",next:"Seterusnya",submit:"Hantar",
   required:"Sila jawab semua soalan wajib (*) sebelum meneruskan.",
@@ -307,7 +307,7 @@ ms:{
     {title:"Kesan & Cadangan",sub:"Bahagian F — Bagaimana AI kredit mempengaruhi anda"},
   ],
   opts:[
-    [["Nigeria","Ghana","Kenya","Brazil","Mexico","Peru","Malaysia","Vietnam","Bangladesh","Lain-lain"],
+    [["Nigeria","Ghana","Kenya","Brazil","Mexico","Peru","Malaysia","Vietnam","Bangladesh"],
      ["Bandar","Pinggir bandar","Luar bandar"],
      ["18-24","25-34","35-44","45-54","55 ke atas"],
      ["Lelaki","Perempuan","Lebih suka tidak menyatakan","Lain-lain"],
@@ -339,7 +339,7 @@ ms:{
 vi:{
   tag:"Khảo sát Tiến sĩ · Đại học Lincoln",
   title:"Chấm điểm Tín dụng AI & Tài chính Toàn diện",
-  desc:"Khảo sát này là một phần của nghiên cứu tiến sĩ. Câu trả lời của bạn hoàn toàn ẩn danh và mất khoảng 8–10 phút.",
+  desc:"Khảo sát này là một phần của nghiên cứu tiến sĩ. Câu trả lời của bạn hoàn toàn ẩn danh và mất khoảng 15-20 phút.",
   consent_note:"Khảo sát này cho nghiên cứu tiến sĩ tại Đại học Lincoln, New Zealand. Ẩn danh hoàn toàn.",
   back:"Quay lại",next:"Tiếp theo",submit:"Gửi",
   required:"Vui lòng trả lời tất cả các câu hỏi bắt buộc (*) trước khi tiếp tục.",
@@ -358,7 +358,7 @@ vi:{
     {title:"Tác động & Đề xuất",sub:"Phần F — AI tín dụng đã ảnh hưởng đến bạn"},
   ],
   opts:[
-    [["Nigeria","Ghana","Kenya","Brazil","Mexico","Peru","Malaysia","Việt Nam","Bangladesh","Khác"],
+    [["Nigeria","Ghana","Kenya","Brazil","Mexico","Peru","Malaysia","Việt Nam","Bangladesh"],
      ["Thành thị","Ngoại ô","Nông thôn"],
      ["18-24","25-34","35-44","45-54","55 tuổi trở lên"],
      ["Nam","Nữ","Không muốn nói","Khác"],
@@ -390,7 +390,7 @@ vi:{
 bn:{
   tag:"পিএইচডি গবেষণা জরিপ · লিংকন বিশ্ববিদ্যালয়",
   title:"এআই ক্রেডিট স্কোরিং ও আর্থিক অন্তর্ভুক্তি",
-  desc:"এই জরিপটি একটি পিএইচডি গবেষণার অংশ। আপনার উত্তর সম্পূর্ণ বেনামী এবং প্রায় ৮–১০ মিনিট সময় নেবে।",
+  desc:"এই জরিপটি একটি পিএইচডি গবেষণার অংশ। আপনার উত্তর সম্পূর্ণ বেনামী এবং প্রায় ১৫-২০ মিনিট সময় নেবে।",
   consent_note:"এই জরিপটি লিংকন বিশ্ববিদ্যালয়, নিউজিল্যান্ডে পিএইচডি গবেষণার জন্য। উত্তর বেনামী।",
   back:"পেছনে",next:"পরবর্তী",submit:"জমা দিন",
   required:"অনুগ্রহ করে সমস্ত প্রয়োজনীয় প্রশ্নের (*) উত্তর দিন।",
@@ -409,7 +409,7 @@ bn:{
     {title:"প্রভাব ও পরামর্শ",sub:"বিভাগ চ — এআই ক্রেডিট আপনাকে কীভাবে প্রভাবিত করেছে"},
   ],
   opts:[
-    [["নাইজেরিয়া","ঘানা","কেনিয়া","ব্রাজিল","মেক্সিকো","পেরু","মালয়েশিয়া","ভিয়েতনাম","বাংলাদেশ","অন্যান্য"],
+    [["নাইজেরিয়া","ঘানা","কেনিয়া","ব্রাজিল","মেক্সিকো","পেরু","মালয়েশিয়া","ভিয়েতনাম","বাংলাদেশ"],
      ["শহর","শহরতলী","গ্রাম"],
      ["১৮-২৪","২৫-৩৪","৩৫-৪৪","৪৫-৫৪","৫৫ বা তার বেশি"],
      ["পুরুষ","মহিলা","বলতে চাই না","অন্যান্য"],
@@ -678,6 +678,93 @@ function doSubmit(){
   // Show submitting state
   document.getElementById('body').innerHTML=`<div class="submitting">⏳ Submitting your response...</div>`;
 
+
+  // ---- GOOGLE FORMS BACKUP SUBMISSION (fires independently, does not affect UI) ----
+  const GOOGLE_FORM_ENTRY_MAP = {
+    country: '1506663397',
+    area: '835014142',
+    age: '1641638321',
+    gender: '1613829667',
+    education: '1936258872',
+    employment: '1424847463',
+    consent: '1188674595',
+    bank: '548162393',
+    credit: '17241356',
+    reject: '1081317101',
+    mobile: '471924743',
+    digisvc: '1871120319',
+    aware: '2099635197',
+    used: '1208562409',
+    platform: '1159114564',
+    understand: '178039736',
+    fair: '580796852',
+    trust_ai: '1947043939',
+    reg_aware: '1307517117',
+    reg_trust: '1113618207',
+    data_prot: '874780287',
+    reg_need: '635023673',
+    concerns: '569291060',
+    fin_lit: '632397642',
+    choice: '1072587818',
+    switch: '188583136',
+    info: '2135829566',
+    impact: '1580494310',
+    inclusion: '575797542',
+    recommend: '1885096084',
+    improve: '1739730596',
+    comments: '197870882'
+  };
+  const GOOGLE_FORM_CHECKBOX_FIELDS = new Set(['improve', 'concerns', 'info', 'digisvc']);
+  const GOOGLE_FORM_ENDPOINT = 'https://docs.google.com/forms/d/e/1FAIpQLSe41Tte2oHO8WfgIF8IzcUKZBUVAgZ-Zk5yWfhYnL97ADCGsQ/formResponse';
+
+  // Real hidden <form> POST into a hidden <iframe>, instead of fetch(). This uses
+  // genuine browser form-submission behaviour, which Google's endpoint is built
+  // to expect, rather than a JS-constructed request under no-cors restrictions.
+  (function submitToGoogleForm() {
+    let iframe = document.getElementById('gform-hidden-iframe');
+    if (!iframe) {
+      iframe = document.createElement('iframe');
+      iframe.name = 'gform-hidden-iframe';
+      iframe.id = 'gform-hidden-iframe';
+      iframe.style.display = 'none';
+      document.body.appendChild(iframe);
+    }
+
+    const gform = document.createElement('form');
+    gform.action = GOOGLE_FORM_ENDPOINT;
+    gform.method = 'POST';
+    gform.target = 'gform-hidden-iframe';
+    gform.style.display = 'none';
+
+    Object.keys(GOOGLE_FORM_ENTRY_MAP).forEach(fieldId => {
+      const entryName = 'entry.' + GOOGLE_FORM_ENTRY_MAP[fieldId];
+      const val = engAns[fieldId];
+      if (val === undefined || val === null || val === '') return;
+      if (GOOGLE_FORM_CHECKBOX_FIELDS.has(fieldId) && Array.isArray(val)) {
+        val.forEach(v => {
+          const input = document.createElement('input');
+          input.type = 'hidden';
+          input.name = entryName;
+          input.value = v;
+          gform.appendChild(input);
+        });
+      } else {
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = entryName;
+        input.value = val;
+        gform.appendChild(input);
+      }
+    });
+
+    document.body.appendChild(gform);
+    gform.submit();
+    // Clean up shortly after -- the browser has already captured the submission
+    // by the time this runs, this just tidies the DOM.
+    setTimeout(() => { gform.remove(); }, 2000);
+  })();
+  // ---- END GOOGLE FORMS BACKUP SUBMISSION ----
+
   // SUBMIT TO FORMSPREE — replace YOUR_FORMSPREE_ID below
   const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mykaeprq';
 
@@ -691,13 +778,11 @@ function doSubmit(){
       document.getElementById('body').innerHTML=`<div class="success"><div class="icon">✅</div><h2>${t.success_title}</h2><p>${t.success_msg}</p><p style="margin-top:16px;font-size:12px;color:#888">${t.success_foot}</p></div>`;
       document.getElementById('prog').style.width='100%';
     } else {
-      // Fallback — show success anyway and log
-      document.getElementById('body').innerHTML=`<div class="success"><div class="icon">✅</div><h2>${t.success_title}</h2><p>${t.success_msg}</p><p style="margin-top:16px;font-size:12px;color:#888">${t.success_foot}</p></div>`;
-      document.getElementById('prog').style.width='100%';
+      document.getElementById('body').innerHTML=`<div class="success"><div class="icon">⚠️</div><h2>Submission failed</h2><p>Something went wrong sending your response. Please try again, or contact the researcher if this keeps happening.</p></div>`;
     }
   })
   .catch(()=>{
-    document.getElementById('body').innerHTML=`<div class="success"><div class="icon">✅</div><h2>${t.success_title}</h2><p>${t.success_msg}</p><p style="margin-top:16px;font-size:12px;color:#888">${t.success_foot}</p></div>`;
+    document.getElementById('body').innerHTML=`<div class="success"><div class="icon">⚠️</div><h2>Connection problem</h2><p>Your response could not be sent — please check your internet connection and try again.</p></div>`;
     document.getElementById('prog').style.width='100%';
   });
 }
